@@ -1,6 +1,5 @@
 <template>
   <div class="app">
-    <app-guide/>
     <div class="app-content">
       <router-view/>
     </div>
@@ -47,12 +46,8 @@
 </template>
 
 <script>
-import AppGuide from '@/pages/AppGuide'
 export default {
   name: 'app',
-  components: {
-    AppGuide
-  },
   data () {
     return {
       navShowFlag: false
