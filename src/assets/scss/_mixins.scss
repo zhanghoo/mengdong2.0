@@ -1,0 +1,17 @@
+@mixin centerH() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+};
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}  
+}
+@mixin text-ellipsis{
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
