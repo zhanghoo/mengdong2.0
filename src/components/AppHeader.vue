@@ -1,13 +1,72 @@
 <template>
-  <div class="header"></div>
+  <div class="app-header" :class="{ transparent: isTransparent}">
+    <div class="ah-left">
+       <slot name="left">左</slot>
+    <div>
+    <div class="ah-center" :class="{ transparent: isTransparent}">
+      <slot name="title">标题</slot>
+    </div>
+    <div class="ah-right">
+      <slot name="right">右</slot>
+    </div>
+  </div>
 </template>
+
 <script>
 export default {
-  name: 'appHeader'
+  name: 'appHeader',
+  props: {
+    isTransparent: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    show () {
+      this.isTransparent = false
+    },
+    hide () {
+      this.isTransparent = true
+    }
+  }
 }
 </script>
-<style lang="scss">
-.header {
 
+<style lang="scss">
+@import "../assets/scss/md";
+.appheader {
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 0 15px;
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+  background: $mainColor;
+  transition: background 1s linear;
+  &.transparent {
+    background: transparent;
+  }
+  color: #fff;
+  z-index: $zIndexNav;
+  .app-left {
+    width: 20%;
+  }
+  .app-title {
+    flex: 1;
+    width: 60%;
+    text-align: center;
+    color: #fff;
+    @include text-ellipsis();
+    transition: color 1s linear;
+    &.transparent {
+      color: transparent;
+    }
+  }
+  .app-right {
+    width: 20%;
+    text-align: right;
+  }
 }
 </style>
