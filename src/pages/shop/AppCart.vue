@@ -1,13 +1,13 @@
 <template>
-  <div class="cart"></div>
+  <div class="app-cart"></div>
 </template>
 <script>
 export default {
-  name: 'cart'
+  name: 'appCart'
 }
 </script>
 <style lang="scss">
-.cart {
+.app-cart {
 
 }
 </style>
