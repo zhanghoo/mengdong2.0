@@ -74,10 +74,11 @@ export default {
 * key  
 * slot  
 * 其他特性 eg, :class="", src=""  
-* v-on eg, @click  
+* v-on eg, @click  
+
 完整的元素特性顺序：  
-……is（定义）  
-……v-for（列表渲染）  
+……is（定义）  
+……v-for（列表渲染）  
 ……v-if/v-else-if/v-else/v-show/v-cloak（条件渲染）  
 ……v-pre/v-once（渲染方式）  
 ……id（全局感知）  
