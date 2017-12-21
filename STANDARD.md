@@ -12,9 +12,9 @@ components：非pages所有vue。
 ### page命名
 以app开头加单词，因为一些单个的单词可能会在引用时会和DOM元素有冲突。
 ### components命名
-单例组件：一个页面只出现一次，且不接受prop的，加前缀：The。eg：TheCircleProgressBar.vue  
-基础组件：应用特定样式和约定的基础组件 (也就是展示类的、无逻辑的或无状态的组件)，加前缀：App。eg：AppHeader.vue  
-紧耦合组件：一个组件只在特定的父组件下出现，则尽量将此关系体现出来。eg：只在TabsMainBlog.vue中出现的TabsMainBlogArticlePanel.vue等组件  
+` 单例组件 `：一个页面只出现一次，且不接受prop的，加前缀：The。eg：TheCircleProgressBar.vue  
+` 基础组件 `：应用特定样式和约定的基础组件 (也就是展示类的、无逻辑的或无状态的组件)，加前缀：App。eg：AppHeader.vue  
+` 紧耦合组件 `：一个组件只在特定的父组件下出现，则尽量将此关系体现出来。eg：只在TabsMainBlog.vue中出现的TabsMainBlogArticlePanel.vue等组件  
 组件名单词顺序：组件名应该以高级别的 (通常是一般化描述的) 单词开头，以描述性的修饰词结尾。eg：TabsMainGoods.vue  
 ### 组件中的规范
 需包含三个顶层元素：template，script，style。且顺序都要一致。  
