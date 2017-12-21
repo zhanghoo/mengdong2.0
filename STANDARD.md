@@ -59,23 +59,23 @@ export default {
 </style>
 ```
 ### 组件（常用）选项的顺序
-* name             （全局感知）  
-* components       （模板依赖/directives/filters）  
-* props            （接口）  
-* data             （本地状态）  
-* computed         （本地状态）  
-* watch            （响应式事件触发的回调）  
-* created          （响应式事件触发的回调，生命周期钩子函数：beforeCreat-created-beforeMount-mounted-beforeUpdate-updated-……  
-* methods          （非响应式的属性）  
-### （常用）元素特性的顺序
-* v-for  
-* v-if/v-else  
-* v-show  
-* ref  
-* key  
-* slot  
-* 其他特性 eg, :class="", src=""  
-* v-on eg, @click  
+* ` name: ''` （全局感知）  
+* ` components: {}` （模板依赖/directives/filters）  
+* ` props:  ` （接口）  
+* ` data () ` （本地状态）  
+* ` computed:  ` （本地状态）  
+* ` watch: ` （响应式事件触发的回调）  
+* ` created () ` （响应式事件触发的回调，生命周期钩子函数：beforeCreat-created-beforeMount-mounted-beforeUpdate-updated-……  
+* ` methods: ` （非响应式的属性）  
+### 元素（常用）特性的顺序
+* ` v-for `    
+* ` v-if/v-else `  
+* ` v-show `  
+* ` ref `  
+* ` key `  
+* ` slot `  
+* ` 其他特性 ` eg, :class="", src=""  
+* ` v-on ` eg, @click  
 
 完整的元素特性顺序：  
 ……is（定义）  
