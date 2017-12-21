@@ -1,13 +1,13 @@
 <template>
-  <div class="message"></div>
+  <div class="app-essage"></div>
 </template>
 <script>
 export default {
-  name: 'message'
+  name: 'appMessage'
 }
 </script>
 <style lang="scss">
-.message {
+.app-message {
 
 }
 </style>
