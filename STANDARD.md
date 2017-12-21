@@ -20,16 +20,16 @@ components：非pages所有vue。
 需包含三个顶层元素：template，script，style。且顺序都要一致。  
 1. template  
 1.0 template元素下头个元素（div，起包裹作用的）类名，尽量和组件名一致，且采用短横线命名，如果太长，则可以省略一些。eg：TabsMainGoodsPickedPanel.vue中的goods-picked  
-1.1 其他的元素类采用该类名的省略作为前缀，eg：gp-……，相同前缀的，继续取下一个字母，以此类推eg：gpi-……  
-1.2 在单文件组件中，引用组件 采用（短横线）闭合组件，保持DOM元素中的一致性。eg：<the-circle-progress-bar/>  
-1.3 props使用短横线  
+1.1 其他的元素类采用该类名的省略作为前缀，eg：gp-……，相同前缀的，继续取下一个字母，以此类推eg：gpi-……  
+1.2 在单文件组件中，引用组件 采用（短横线）闭合组件，保持DOM元素中的一致性。eg：<the-circle-progress-bar/>   
+1.3 props使用短横线  
 1.4 多行特性元素要换行，更易读。  
 2. script  
-2.0 script元素中的name，可以帮助调式是的定位，也可以用于递归调用自身。命名时采用驼峰法和组件名保持一致。eg：name："tabsMainGoodsPickedPanel"  
+2.0 script元素中的name，可以帮助调式是的定位，也可以用于递归调用自身。命名时采用驼峰法和组件名保持一致。eg：name："tabsMainGoodsPickedPanel"  
 2.1 私有属性/方法采用，前缀：$_md_ md是mengdong的缩写 -。-  
-2.2 props命名使用驼峰法，且尽量详述  
-3. stype  
-3.0 style元素中尽量不出现元素选择器，而都采用class选择器。scoped，也可用前缀起到相同的，作用域作用。eg：.goods-picked {...  
+2.2 props命名使用驼峰法，且尽量详述  
+3. stype  
+3.0 style元素中尽量不出现元素选择器，而都采用class选择器。scoped，也可用前缀起到相同的，作用域作用。eg：.goods-picked {...}  
 完整的示例：
 TabsMainGoodsPickedPanel.vue:
 ``` html
