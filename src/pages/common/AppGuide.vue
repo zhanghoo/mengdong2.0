@@ -1,5 +1,5 @@
 <template>
-  <div class="guide" v-if="showFlag">
+  <div class="app-guide" v-if="showFlag">
     <div class="guide-init" :class="{ show: isShow }">
       <div class="jump-circle" @click="hideFirst">
         <the-circle-progress-bar/>
@@ -27,7 +27,7 @@
 <script>
 import TheCircleProgressBar from '@/components/TheCircleProgressBar'
 export default {
-  name: 'guide',
+  name: 'appGuide',
   components: {
     TheCircleProgressBar
   },
@@ -71,7 +71,7 @@ export default {
 </script>
 <style lang="scss">
 @import "../assets/scss/md";
-.guide {
+.app-guide {
   position: fixed;
   top: 0;
   left: 0;
