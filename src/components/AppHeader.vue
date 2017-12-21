@@ -51,11 +51,10 @@ export default {
   color: #fff;
   z-index: $zIndexNav;
   .app-left {
-    width: 20%;
+    min-width: 40px;
   }
   .app-title {
     flex: 1;
-    width: 60%;
     text-align: center;
     color: #fff;
     @include text-ellipsis();
@@ -65,7 +64,7 @@ export default {
     }
   }
   .app-right {
-    width: 20%;
+    min-width: 40px;
     text-align: right;
   }
 }
