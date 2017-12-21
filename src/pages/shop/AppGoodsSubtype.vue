@@ -1,13 +1,13 @@
 <template>
-  <div class="goods-type-list"></div>
+  <div class="app-goods-subtype"></div>
 </template>
 <script>
 export default {
-  name: 'goodsTypeList'
+  name: 'appGoodsSubtype'
 }
 </script>
 <style lang="scss">
-.goods-type-list {
+.app-goods-subtype {
 
 }
 </style>
