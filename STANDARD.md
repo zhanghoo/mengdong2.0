@@ -30,13 +30,11 @@ TabsMainGoodsPickedPanel.vue:
     <div class="gp-content"></div>
   </div>
 </template>
-``` javascript
 <script>
 export default {
   name: 'tabsMainGoodsPickedPanel'
 }
 </script>
-``` sass
 <style lang="scss">
 .goods-picked {
   .gp-content {
