@@ -22,7 +22,7 @@ template元素下头个元素（div，起包裹作用的）类名，尽量和组
 其他的元素类采用该类名的省略作为前缀，eg：gp-……，相同前缀的，继续取下一个字母，以此类推eg：gpi-……
 script元素中的name，可以帮助调式是的定位，也可以用于递归调用自身。命名时采用驼峰法和组件名保持一致。eg：name："tabsMainGoodsPickedPanel"
 style元素中尽量不出现元素选择器，而都采用class选择器。scoped，也可用前缀起到相同的，作用域作用。eg：.goods-picked {...}
-完成的示例：
+完整的示例：
 TabsMainGoodsPickedPanel.vue:
 ``` html
 <template>
