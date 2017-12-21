@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'circleProgressBar',
+  name: 'theCircleProgressBar',
   data () {
     return {
       text: '',
