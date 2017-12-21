@@ -1,13 +1,13 @@
 <template>
-  <div class="order"></div>
+  <div class="app-order"></div>
 </template>
 <script>
 export default {
-  name: 'order'
+  name: 'appOrder'
 }
 </script>
 <style lang="scss">
-.order {
+.app-order {
 
 }
 </style>
