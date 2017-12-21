@@ -1,13 +1,13 @@
 <template>
-  <div class="goods-type"></div>
+  <div class="app-goods-supertype"></div>
 </template>
 <script>
 export default {
-  name: 'goodsType'
+  name: 'appGoodsSupertype'
 }
 </script>
 <style lang="scss">
-.goods-type {
+.goods-supertype {
 
 }
 </style>
