@@ -1,13 +1,13 @@
 <template>
-  <div class="main-blog"></div>
+  <div class="tabs-main-blog"></div>
 </template>
 <script>
 export default {
-  name: 'mainBlog'
+  name: 'tabsMainBlog'
 }
 </script>
 <style lang="scss">
-.main-blog {
+.tabs-main-blog {
 
 }
 </style>
