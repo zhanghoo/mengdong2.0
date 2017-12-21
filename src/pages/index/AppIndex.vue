@@ -1,12 +1,12 @@
 <template>
-  <div class="index"></div>
+  <div class="app-index"></div>
 </template>
 <script>
 export default {
-  name: 'index'
+  name: 'appIndex'
 }
 </script>
 <style lang="scss">
-.index {
+.app-index {
 }
 </style>
