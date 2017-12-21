@@ -12,3 +12,11 @@ export const login = ({commit, state}) => {
     commit(types.SET_LOGIN_STATUS, false)
   }
 }
+
+export const hideAppNav = ({commit, state}) => {
+  commit(types.SET_APP_NAV_SHOW, false)
+}
+
+export const showAppNav = ({commit, state}) => {
+  commit(types.SET_APP_NAV_SHOW, true)
+}

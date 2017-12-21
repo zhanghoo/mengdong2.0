@@ -2,7 +2,7 @@
   <div class="app-header" :class="{ transparent: isTransparent}">
     <div class="ah-left">
        <slot name="left">左</slot>
-    <div>
+    </div>
     <div class="ah-center" :class="{ transparent: isTransparent}">
       <slot name="title">标题</slot>
     </div>
@@ -34,7 +34,7 @@ export default {
 
 <style lang="scss">
 @import "../assets/scss/md";
-.appheader {
+.app-header {
   display: flex;
   position: fixed;
   left: 0;
@@ -50,10 +50,10 @@ export default {
   }
   color: #fff;
   z-index: $zIndexNav;
-  .app-left {
+  .ah-left {
     min-width: 40px;
   }
-  .app-title {
+  .ah-center {
     flex: 1;
     text-align: center;
     color: #fff;
@@ -63,7 +63,7 @@ export default {
       color: transparent;
     }
   }
-  .app-right {
+  .ah-right {
     min-width: 40px;
     text-align: right;
   }

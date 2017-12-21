@@ -26,6 +26,7 @@
 </template>
 <script>
 import TheCircleProgressBar from '@/components/TheCircleProgressBar'
+import { mapActions } from 'vuex'
 export default {
   name: 'appGuide',
   components: {
@@ -56,12 +57,19 @@ export default {
       }
     }
   },
+  created () {
+    this.$_hideAppNav()
+  },
   methods: {
+    ...mapActions({
+      $_hideAppNav: 'hideAppNav'
+    }),
     show () {
       this.showFlag = true
     },
     hide () {
       this.showFlag = false
+      this.$router.push('registerlogin')
     },
     hideFirst () {
       this.isShow = false
@@ -70,7 +78,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import "../assets/scss/md";
+@import "../../assets/scss/md";
 .app-guide {
   position: fixed;
   top: 0;

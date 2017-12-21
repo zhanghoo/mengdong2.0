@@ -13,7 +13,7 @@
         </router-link>
       </div>
       <div class="app-nav-item">
-        <router-link to="/friends">
+        <router-link to="/friend">
           <div>
             <span class="icon"></span>
             <p class="text">伴</p>
@@ -46,12 +46,22 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'app',
-  data () {
-    return {
-      navShowFlag: false
+  computed: {
+    navShowFlag () {
+      return this.$store.state.appNavShow
     }
+  },
+  created () {
+    this.$_hideAppNav()
+  },
+  methods: {
+    ...mapActions({
+      $_hideAppNav: 'hideAppNav'
+    })
   }
 }
 </script>

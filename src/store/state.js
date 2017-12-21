@@ -1,5 +1,6 @@
 const state = {
   guideStatus: true,
-  loginStatus: false
+  loginStatus: false,
+  appNavShow: false
 }
 export default state

@@ -6,6 +6,9 @@ const mutations = {
   },
   [types.SET_LOGIN_STATUS] (state, loginStatus) {
     state.loginStatus = loginStatus
+  },
+  [types.SET_APP_NAV_SHOW] (state, appNavShow) {
+    state.appNavShow = appNavShow
   }
 }
 
