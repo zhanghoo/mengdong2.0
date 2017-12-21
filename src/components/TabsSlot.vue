@@ -1,13 +1,13 @@
 <template>
-  <div class="tabs-shop"></div>
+  <div class="tabs-slot"></div>
 </template>
 <script>
 export default {
-  name: 'tabsShop'
+  name: 'tabsSlot'
 }
 </script>
 <style lang="scss">
-.tabs-shop {
+.tabs-slot {
 
 }
 </style>
