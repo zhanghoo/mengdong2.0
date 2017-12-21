@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'header'
+  name: 'appHeader'
 }
 </script>
 <style lang="scss">
