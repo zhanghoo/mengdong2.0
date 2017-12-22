@@ -1,19 +1,19 @@
 <template>
   <div class="main-goods">
     <app-tabs :nav-item="navItem" :slot-prefix="as-">
-        <swiper :options="swiperPickedOption" class="mg-swiper" slot="as-0">
-          <swiper-slide></swiper-slide>
-          <div class="swiper-scrollbar swiper-picked-scrollbar" slot="scrollbar"></div>
-        </swiper>
-        <swiper :options="swiperHotOption" class="mg-swiper" slot="as-1">
-          <swiper-slide></swiper-slide>
-          <div class="swiper-scrollbar swiper-best-scrollbar" slot="scrollbar"></div>
-        </swiper>
-        <swiper :options="swiperLimitOption" class="mg-swiper" slot="as-2">
-          <swiper-slide></swiper-slide>
-          <div class="swiper-scrollbar swiper-limit-scrollbar" slot="scrollbar"></div>
-        </swiper>
-      </app-tabs>
+      <swiper :options="swiperPickedOption" class="mg-swiper" slot="as-0">
+        <swiper-slide></swiper-slide>
+        <div class="swiper-scrollbar swiper-picked-scrollbar" slot="scrollbar"></div>
+      </swiper>
+      <swiper :options="swiperHotOption" class="mg-swiper" slot="as-1">
+        <swiper-slide></swiper-slide>
+        <div class="swiper-scrollbar swiper-best-scrollbar" slot="scrollbar"></div>
+      </swiper>
+      <swiper :options="swiperLimitOption" class="mg-swiper" slot="as-2">
+        <swiper-slide></swiper-slide>
+        <div class="swiper-scrollbar swiper-limit-scrollbar" slot="scrollbar"></div>
+      </swiper>
+    </app-tabs>
   </div>
 </template>
 
