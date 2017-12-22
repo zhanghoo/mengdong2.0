@@ -1,15 +1,13 @@
 <template>
   <div class="app-tabs">
     <div class="at-nav">
-      <a 
-      v-for="(item, index) in navItem" 
-      :key="index" 
-      href="javascript" 
-      class="at-nav-item"
-      :style="{ width: navItemWidth }"
-      @click="selectType(index)"
-      >
-      {{item.desc}}
+      <a v-for="(item, index) in navItem" 
+         :key="index" 
+         href="javascript" 
+         class="at-nav-item"
+         :style="{ width: navItemWidth }"
+         @click="selectType(index)">
+        {{item.desc}}
       </a>
       <div ref="tabsSlideBar" class="at-slide-bar"></div>
     </div>
@@ -30,7 +28,29 @@ export default {
     navItem: Array,
     slotPrefix: String
   },
+  data () {
+    const self = this
+    return {
+      swiperOption: {
+        /* eslint-disable */
+        clickable: true,
+        autoplay: false,
+        roundLengths: true, // 防止文字模糊
+        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true, // 修改swiper的父元素时，自动初始化swiper
+        on: {
+          slideChangeTransitionStart() {
+            self.$refs.tabsSlideBar.style.left = `${this.activeIndex * this.navItemWidth}`
+          }
+        }
+        /* eslint-enable */
+      }
+    }
+  },
   computed: {
+    swiper () {
+      return this.$refs.swiper.swiper
+    },
     navItemNum () {
       return this.navItem.length
     },
