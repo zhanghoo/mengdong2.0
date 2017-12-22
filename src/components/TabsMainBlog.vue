@@ -26,7 +26,9 @@
         <swiper-slide>
           <swiper :options="swiperArticleOption" class="text-swiper">
             <swiper-slide>
-              <div style="width: 100%; height: 800px;"></div>
+              <div v-for="article in appList.articles" @click.stop="clickArticle(article)" :key="article.id">
+                <tabs-main-blog-article-panel :article="article" />
+              </div>
             </swiper-slide>
             <div class="swiper-scrollbar swiper-article-scrollbar" slot="scrollbar"></div>
           </swiper>
@@ -34,7 +36,9 @@
         <swiper-slide>
           <swiper :options="swiperImageOption" class="text-swiper">
             <swiper-slide>
-              <div style="width: 100%; height: 800px;"></div>
+              <div v-for="image in appList.images" @click.stop="clickImage(image)" :key="image.id">
+                <tabs-main-blog-image-panel :image="image" />
+              </div>
             </swiper-slide>
             <div class="swiper-scrollbar swiper-image-scrollbar" slot="scrollbar"></div>
           </swiper>
@@ -42,7 +46,9 @@
         <swiper-slide>
           <swiper :options="swiperVideoOption" class="text-swiper">
             <swiper-slide>
-              <div style="width: 100%; height: 800px;"></div>
+              <div v-for="video in appList.videos" @click.stop="clickVideo(video)" :key="video.id">
+                <tabs-main-blog-video-panel :video="video" />
+              </div>
             </swiper-slide>
             <div class="swiper-scrollbar swiper-video-scrollbar" slot="scrollbar"></div>
           </swiper>
@@ -53,8 +59,20 @@
 </template>
 
 <script>
+import TabsMainBlogArticlePanel from '@/components/TabsMainBlogArticlePanel'
+import TabsMainBlogImagePanel from '@/components/TabsMainBlogImagePanel'
+import TabsMainBlogVideoPanel from '@/components/TabsMainBlogVideoPanel'
+
 export default {
   name: 'tabsMainBlog',
+  components: {
+    TabsMainBlogArticlePanel,
+    TabsMainBlogImagePanel,
+    TabsMainBlogVideoPanel
+  },
+  props: {
+    appList: Object
+  },
   data () {
     const self = this
     return {
@@ -64,67 +82,39 @@ export default {
       selectedVideo: {},
       mainSwiperOption: {
         /* eslint-disable */
-        clickable: true,
-        autoplay: false,
-        roundLengths: true, // 防止文字模糊
-        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
-        observeParents: true, // 修改swiper的父元素时，自动初始化swiper
+        direction: 'horizontal',
+        slidesPerView: 1,
+        mousewheel: false,
+        autoHeight: false,
         on: {
           slideChangeTransitionStart() {
-            self.$refs.mainSlideBar.style.left = `${this.activeIndex * 33.3333}%`
+            self.$refs.tabsMainBlogSlideBar.style.left = `${this.activeIndex * 33.3333}%`
           }
         }
         /* eslint-enable */
       },
       swiperArticleOption: {
         /* eslint-disable */
-        direction: 'vertical',
-        slidesPerView: 'auto',
-        clickable: true,
-        freeMode: true,
-        autoHeight: true, //高度随内容变化
         scrollbar: {
           el: '.swiper-article-scrollbar',
           hide: true
-        },
-        mousewheel: true,
-        roundLengths : true, // 防止文字模糊
-        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
-        observeParents: true, // 修改swiper的父元素时，自动初始化swiper
+        }
         /* eslint-enable */
       },
       swiperImageOption: {
         /* eslint-disable */
-        direction: 'vertical',
-        slidesPerView: 'auto',
-        clickable: true,
-        freeMode: true,
-        autoHeight: true, //高度随内容变化
         scrollbar: {
           el: '.swiper-image-scrollbar',
           hide: true
-        },
-        mousewheel: true,
-        roundLengths : true, // 防止文字模糊
-        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
-        observeParents: true, // 修改swiper的父元素时，自动初始化swiper
+        }
         /* eslint-enable */
       },
       swiperVideoOption: {
         /* eslint-disable */
-        direction: 'vertical',
-        slidesPerView: 'auto',
-        clickable: true,
-        freeMode: true,
-        autoHeight: true, //高度随内容变化
         scrollbar: {
           el: '.swiper-video-scrollbar',
           hide: true
-        },
-        mousewheel: true,
-        roundLengths : true, // 防止文字模糊
-        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
-        observeParents: true, // 修改swiper的父元素时，自动初始化swiper
+        }
         /* eslint-enable */
       }
     }
@@ -135,10 +125,21 @@ export default {
     }
   },
   methods: {
+    clickArticle (article) {
+      this.selectedArticle = article
+      // this.textsType = 0
+      // this.$refs.article.show()
+    },
+    clickImage (image) {
+      this.selectedImage = image
+      // this.$refs.image.show()
+    },
+    clickVideo (video) {
+      this.selectedVideo = video
+      // this.$refs.video.show()
+    },
     selectType (type) {
-      if (this.showActive) {
-        this.mainSwiper.slideTo(type)
-      }
+      this.mainSwiper.slideTo(type)
     }
   }
 }

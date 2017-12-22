@@ -3,9 +3,9 @@
     <div class="at-nav">
       <a v-for="(item, index) in navItem" 
          :key="index" 
-         href="javascript" 
+         href="javascript:;" 
          class="at-nav-item"
-         :style="{ width: navItemWidth }"
+         :style="{ width: `${navItemWidth}%` }"
          @click="selectType(index)">
         {{item.desc}}
       </a>
@@ -14,7 +14,7 @@
     <div class="at-content">
       <swiper ref="swiper" :options="swiperOption" class="at-swiper">
         <swiper-slide v-for="(item, index) in navItem" :key="index" class="at-slide">
-          <slot name="slidePanel">{{index}}</slot>
+          <slot name="item">{{index}}</slot>
         </swiper-slide>
       </swiper>
     </div>
@@ -25,22 +25,20 @@
 export default {
   name: 'appTabs',
   props: {
-    navItem: Array,
-    slotPrefix: String
+    navItem: Array
   },
   data () {
     const self = this
     return {
       swiperOption: {
         /* eslint-disable */
-        clickable: true,
-        autoplay: false,
-        roundLengths: true, // 防止文字模糊
-        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
-        observeParents: true, // 修改swiper的父元素时，自动初始化swiper
+        direction: 'horizontal',
+        slidesPerView: 1,
+        mousewheel: false,
+        autoHeight: false,
         on: {
           slideChangeTransitionStart() {
-            self.$refs.tabsSlideBar.style.left = `${this.activeIndex * this.navItemWidth}`
+            self.$refs.tabsSlideBar.style.left = `${this.activeIndex * self.navItemWidth}%`
           }
         }
         /* eslint-enable */
@@ -55,11 +53,8 @@ export default {
       return this.navItem.length
     },
     navItemWidth () {
-      const navItemWidth = (1 / this.navItemNum).toFixed(4) * 100
-      return `${navItemWidth}%`
-    },
-    slidePanel (index) {
-      return `${this.slotPrefix}${index}`
+      const navItemWidth = (1 / this.navItemNum) * 100
+      return `${navItemWidth.toFixed(4)}`
     }
   },
   methods: {
@@ -71,6 +66,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/scss/md";
 .app-tabs {
   position: absolute;
   top: 0;
@@ -87,7 +83,7 @@ export default {
     line-height: 48px;
     text-align: center;
     background: $bgColor;
-    z-index: 10;
+    z-index: 20;
     .at-slide-bar {
       position: absolute;
       bottom: 0;

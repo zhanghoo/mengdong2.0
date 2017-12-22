@@ -6,7 +6,7 @@
       <span slot="right" class="icon icon-search" @click="show">搜索</span>
     </app-header>
     <div class="ai-content">
-      <tabs-main-blog/>
+      <tabs-main-blog :app-list="appList"/>
     </div>
     <div class="ai-search-panel" v-show="showFlag">
       <div class="ai-header">
@@ -17,7 +17,7 @@
       <div class="ai-recommend">
         <div>
           <p class="ai-title">今日推荐</p>
-          <div class="ai-content">
+          <div class="ai-content2">
             猫是不恋家的，最后总会决绝离开<br>
             众人皆睡我独行，黑夜是猫不变的追寻<br>
             经历整个人世冷暖，彼此命运交叠成无数曲折<br>
@@ -37,8 +37,9 @@
 
 <script>
 import { mapActions } from 'vuex'
-import AppHeader from '@/components/AppHeader',
-import AppHeader from '@/components/TabsMainBlog'
+import AppHeader from '@/components/AppHeader'
+import TabsMainBlog from '@/components/TabsMainBlog'
+import axios from 'axios'
 export default {
   name: 'appIndex',
   components: {
@@ -47,11 +48,15 @@ export default {
   },
   data () {
     return {
+      appList: {},
       showFlag: false
     }
   },
   created () {
     this.$_showAppNav()
+    axios.get('static/mocks/texts-main.json').then((res) => {
+      this.appList = res.data
+    })
   },
   methods: {
     ...mapActions({
@@ -70,6 +75,14 @@ export default {
 <style lang="scss">
 @import "../../assets/scss/md";
 .app-index {
+  .ai-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 48px 0 58px 0;
+    width: 100%;
+    height: 100%;
+  }
   .ai-search-panel {
     position: fixed;
     top: 0;
@@ -115,7 +128,7 @@ export default {
         color: #ddd;
         border-bottom: 1px solid #ddd;
       }
-      .ai-content {
+      .ai-content2 {
         margin-top: 30px;
         color: $fontColor;
         line-height: 38px;

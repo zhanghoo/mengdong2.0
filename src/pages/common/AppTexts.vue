@@ -118,7 +118,7 @@ export default {
     AppHeader
   },
   props: {
-   textsType: {
+    textsType: {
       type: Number,
       default: 3
     }

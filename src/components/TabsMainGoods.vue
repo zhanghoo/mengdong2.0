@@ -1,107 +1,156 @@
 <template>
   <div class="main-goods">
-    <app-tabs :nav-item="navItem" :slot-prefix="as-">
-      <swiper :options="swiperPickedOption" class="mg-swiper" slot="as-0">
-        <swiper-slide></swiper-slide>
-        <div class="swiper-scrollbar swiper-picked-scrollbar" slot="scrollbar"></div>
+    <div class="mg-nav">
+      <a href="javascript:;" class="mg-nav-item" @click="selectType(0)">精选</a>
+      <a href="javascript:;" class="mg-nav-item" @click="selectType(1)">热销</a>
+      <a href="javascript:;" class="mg-nav-item" @click="selectType(2)">限时</a>
+      <div ref="tabsMainGoodSlideBar" class="mg-slide-bar"></div>
+    </div>
+    <div class="mg-content">
+      <swiper class="main-swiper" :options="mainSwiperOption" ref="mainSwiper">
+        <swiper-slide>
+          <swiper :options="swiperPickedOption" class="mg-goods-swiper">
+            <swiper-slide>
+              <div style="width: 100%; height: 800px;"></div>
+            </swiper-slide>
+            <div class="swiper-scrollbar swiper-picked-scrollbar" slot="scrollbar"></div>
+          </swiper>
+        </swiper-slide>
+        <swiper-slide>
+          <swiper :options="swiperHotOption" class="mg-goods-swiper">
+            <swiper-slide>
+              <div style="width: 100%; height: 800px;"></div>
+            </swiper-slide>
+            <div class="swiper-scrollbar swiper-hot-scrollbar" slot="scrollbar"></div>
+          </swiper>
+        </swiper-slide>
+        <swiper-slide>
+          <swiper :options="swiperLimitOption" class="mg-goods-swiper">
+            <swiper-slide>
+              <div style="width: 100%; height: 800px;"></div>
+            </swiper-slide>
+            <div class="swiper-scrollbar swiper-limit-scrollbar" slot="scrollbar"></div>
+          </swiper>
+        </swiper-slide>
       </swiper>
-      <swiper :options="swiperHotOption" class="mg-swiper" slot="as-1">
-        <swiper-slide></swiper-slide>
-        <div class="swiper-scrollbar swiper-best-scrollbar" slot="scrollbar"></div>
-      </swiper>
-      <swiper :options="swiperLimitOption" class="mg-swiper" slot="as-2">
-        <swiper-slide></swiper-slide>
-        <div class="swiper-scrollbar swiper-limit-scrollbar" slot="scrollbar"></div>
-      </swiper>
-    </app-tabs>
+    </div>
   </div>
 </template>
 
 <script>
-import AppTabs from '@/components/AppTabs'
 export default {
   name: 'tabsMainGoods',
-  components: {
-    AppTabs
-  },
   data () {
+    const self = this
     return {
-      navItem: [],
+      mainSwiperOption: {
+        /* eslint-disable */
+        direction: 'horizontal',
+        slidesPerView: 1,
+        mousewheel: false,
+        autoHeight: false,
+        on: {
+          slideChangeTransitionStart() {
+            self.$refs.tabsMainGoodSlideBar.style.left = `${this.activeIndex * 33.3333}%`
+          }
+        }
+        /* eslint-enable */
+      },
       swiperPickedOption: {
         /* eslint-disable */
-        direction: 'vertical',
-        slidesPerView: 'auto',
-        clickable: true,
-        freeMode: true,
-        autoHeight: true, //高度随内容变化
         scrollbar: {
           el: '.swiper-picked-scrollbar',
           hide: true
-        },
-        mousewheel: true,
-        roundLengths : true, // 防止文字模糊
-        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
-        observeParents: true, // 修改swiper的父元素时，自动初始化swiper
+        }
         /* eslint-enable */
       },
       swiperHotOption: {
         /* eslint-disable */
-        direction: 'vertical',
-        slidesPerView: 'auto',
-        clickable: true,
-        freeMode: true,
-        autoHeight: true, //高度随内容变化
         scrollbar: {
           el: '.swiper-hot-scrollbar',
           hide: true
-        },
-        mousewheel: true,
-        roundLengths : true, // 防止文字模糊
-        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
-        observeParents: true, // 修改swiper的父元素时，自动初始化swiper
+        }
         /* eslint-enable */
       },
       swiperLimitOption: {
         /* eslint-disable */
-        direction: 'vertical',
-        slidesPerView: 'auto',
-        clickable: true,
-        freeMode: true,
-        autoHeight: true, //高度随内容变化
         scrollbar: {
           el: '.swiper-limit-scrollbar',
           hide: true
-        },
-        mousewheel: true,
-        roundLengths : true, // 防止文字模糊
-        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
-        observeParents: true, // 修改swiper的父元素时，自动初始化swiper
+        }
         /* eslint-enable */
       }
     }
   },
-  created () {
-    this.initNavItem()
+  computed: {
+    mainSwiper () {
+      return this.$refs.mainSwiper.swiper
+    }
   },
   methods: {
-    initNavItem () {
-      this.navItem = [
-        {'id': 0, 'type': 'picked', 'desc': '精选', 'sort': 0},
-        {'id': 1, 'type': 'hot', 'desc': '热销', 'sort': 0},
-        {'id': 2, 'type': 'limit', 'desc': '限时', 'sort': 0}
-      ]
+    selectType (type) {
+      this.mainSwiper.slideTo(type)
     }
   }
 }
 </script>
 
 <style lang="scss">
+@import "../assets/scss/md";
 .main-goods {
+  position: relative;
   width: 100%;
   height: 100%;
-  .mg-swiper {
+  .mg-nav {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    background: $bgColor;
+    z-index: 20;
+    .mg-nav-item {
+      flex: 1;
+    }
+    .mg-slide-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 33.3333%;
+      height: 2px;
+      background: transparent;
+      transition: left .2s ease;
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 25%;
+        width: 50%;
+        height: 3px;
+        background: $orange;
+      }
+    }
+  }
+  .mg-content {
+    position: fixed;
+    padding: 96px 0 58px;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    z-index: 10;
+    background: $slideBgColor;
+    .main-swiper {
+      height: 100%;
+      .mg-goods-swiper {
+        height: 100%;
+      }
+    }
   }
 }
 </style>

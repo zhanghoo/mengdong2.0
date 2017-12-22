@@ -45,10 +45,10 @@ export default {
 @import "../../assets/scss/md";
 .app-shop {
   .as-content {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    padding 48px 0 58px 0;
+    padding: 48px 0 58px 0;
     width: 100%;
     height: 100%;
   }

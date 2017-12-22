@@ -10,11 +10,11 @@
 
 <script>
 import { mapActions } from 'vuex'
-import appHeader from '@/components/appHeader'
+import AppHeader from '@/components/AppHeader'
 export default {
   name: 'appCart',
   components: {
-    appHeader
+    AppHeader
   },
   created () {
     this.$_hideAppNav()
