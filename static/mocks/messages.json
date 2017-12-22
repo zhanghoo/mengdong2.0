@@ -1,0 +1,185 @@
+{
+    "messageList": [
+        {
+            "id": 0,
+            "name": "丫丫",
+            "avatar": "",
+            "type": 0,
+            "unReadNum": 1,
+            "messages": [
+                {
+                    "id": 0,
+                    "type": 1,
+                    "content": "哈哈哈哈，多多好乐呀",
+                    "date": "2017-12-15",
+                    "readed": 0
+                },
+                {
+                    "id": 1,
+                    "type": 0,
+                    "content": "是呀，乐死我了",
+                    "date": "2017-12-15",
+                    "readed": 0
+                },
+                {
+                    "id": 2,
+                    "type": 0,
+                    "content": "对了，今天天气不错，要出去走走吗",
+                    "date": "2017-12-15",
+                    "readed": 0
+                },
+                {
+                    "id": 3,
+                    "type": 1,
+                    "content": "好丫，多多正想出去呢",
+                    "date": "2017-12-15",
+                    "readed": 0
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "name": "系统消息",
+            "avatar": "",
+            "type": 1,
+            "unReadNum": 2,
+            "messages": [
+                {
+                    "id": 0,
+                    "type": 1,
+                    "content": "您购买的秋季汪汪小礼服已经发货啦！",
+                    "date": "2017-12-15",
+                    "readed": 0
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "阿西",
+            "avatar": "",
+            "type": 0,
+            "unReadNum": 0,
+            "messages": [
+                {
+                    "id": 0,
+                    "type": 0,
+                    "content": "你去下个萌懂APP，里面有很多萌宠的衣服",
+                    "date": "2017-12-15",
+                    "readed": 1
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "妮美美",
+            "avatar": "",
+            "type": 0,
+            "unReadNum": 0,
+            "messages": [
+                {
+                    "id": 0,
+                    "type": 1,
+                    "content": "哈哈，粉粉的，这是又要撩妹的节奏啊",
+                    "date": "2017-12-15",
+                    "readed": 1
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "系统通知",
+            "avatar": "",
+            "type": 1,
+            "unReadNum": 1,
+            "messages": [
+                {
+                    "id": 0,
+                    "type": 1,
+                    "content": "亲爱的小菜菜，感谢您的陪伴与支持，萌懂APP第二版已更新，欢迎您给我们更多宝贵的建议和意见，这些将是我们前进的动力。",
+                    "date": "2017-12-15",
+                    "readed": 0
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "会害怕的鱼",
+            "avatar": "",
+            "type": 0,
+            "unReadNum": 0,
+            "messages": [
+                {
+                    "id": 0,
+                    "type": 0,
+                    "content": "今天刚刚更新的哦",
+                    "date": "2017-12-15",
+                    "readed": 1
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "name": "艾梵特",
+            "avatar": "",
+            "type": 0,
+            "unReadNum": 0,
+            "messages": [
+                {
+                    "id": 0,
+                    "type": 1,
+                    "content": "我看到你上午发的图片好文艺啊",
+                    "date": "2017-12-15",
+                    "readed": 1
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "name": "7秒记忆",
+            "avatar": "",
+            "type": 0,
+            "unReadNum": 0,
+            "messages": [
+                {
+                    "id": 0,
+                    "type": 1,
+                    "content": "我看到你上午发的图片好文艺啊",
+                    "date": "2017-12-15",
+                    "readed": 1
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "name": "婉美",
+            "avatar": "",
+            "type": 0,
+            "unReadNum": 0,
+            "messages": [
+                {
+                    "id": 0,
+                    "type": 1,
+                    "content": "今天我家木木的智商惊到我了",
+                    "date": "2017-12-15",
+                    "readed": 1
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "name": "没有毛毛的毛毛虫",
+            "avatar": "",
+            "type": 0,
+            "unReadNum": 0,
+            "messages": [
+                {
+                    "id": 0,
+                    "type": 1,
+                    "content": "好，待会发你看看",
+                    "date": "2017-12-15",
+                    "readed": 1
+                }
+            ]
+        }
+    ]
+}
