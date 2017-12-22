@@ -5,6 +5,9 @@
       <span slot="title">窝</span>
       <span slot="right" class="icon icon-search" @click="show">搜索</span>
     </app-header>
+    <div class="ai-content">
+      <tabs-main-blog/>
+    </div>
     <div class="ai-search-panel" v-show="showFlag">
       <div class="ai-header">
         <span class="ai-icon-box"><i class="icon icon-search"></i></span>
@@ -34,11 +37,13 @@
 
 <script>
 import { mapActions } from 'vuex'
-import appHeader from '@/components/appHeader'
+import AppHeader from '@/components/AppHeader',
+import AppHeader from '@/components/TabsMainBlog'
 export default {
   name: 'appIndex',
   components: {
-    appHeader
+    AppHeader,
+    TabsMainBlog
   },
   data () {
     return {
