@@ -16,7 +16,7 @@
         <swiper :options="shopPetItemSwiperOption" class="agsu-swiper">
           <swiper-slide class="agsu-slide">
             <ul class="agsu-goods-list clearfix">
-              <li v-for="goods in goodsListPack" :key="goods.id" class="agsu-item">
+              <li v-for="goods in goodsList" :key="goods.id" class="agsu-item">
                 <div class="agsu-goods-cover"></div>
                 <div class="agsu-goods-info">
                   <p class="agsu-goods-title">{{goods.title}}</p>
@@ -35,23 +35,78 @@
 <script>
 import { mapActions } from 'vuex'
 import appHeader from '@/components/appHeader'
+import axios from 'axios'
 export default {
   name: 'appGoodsSubtype',
   components: {
     appHeader
   },
+  data () {
+    return {
+      goodsList: [],
+      shopPetItemSwiperOption: {
+        /* eslint-disable */
+        direction: 'vertical',
+        slidesPerView: 'auto',
+        clickable: true,
+        freeMode: true,
+        autoHeight: true, //高度随内容变化
+        scrollbar: {
+          el: '.swiper-pet-item-scrollbar',
+          hide: true
+        },
+        mousewheel: true,
+        roundLengths : true, // 防止文字模糊
+        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true, // 修改swiper的父元素时，自动初始化swiper
+        /* eslint-enable */
+      }
+    }
+  },
   created () {
     this.$_hideAppNav()
+    axios.get('static/mocks/goods-type.json').then((res) => {
+      this.$nextTick(() => {
+        this.goodsList = res.data.dogs.goodsList
+      })
+    })
   },
   methods: {
     ...mapActions({
       $_hideAppNav: 'hideAppNav'
     }),
+    $_compare (order, ...propertyName) {
+      return (obj1, obj2) => {
+        let val1 = obj1[propertyName[0]]
+        let val2 = obj2[propertyName[0]]
+        if (propertyName.length >= 2) {
+          val1 = propertyName.reduce((total, current) => {
+            return obj1[total] * obj1[current]
+          })
+          val2 = propertyName.reduce((total, current) => {
+            return obj2[total] * obj2[current]
+          })
+        }
+        return order === 'asc' ? (val1 - val2) : (val2 - val1)
+      }
+    },
     back () {
       this.$router.go(-1)
     },
     toCart () {
       this.$router.push('cart')
+    },
+    goodsSort (index, sort) {
+      this.$refs.shopPetTypeSlideBar.style.left = `${index * 33.3333}%`
+      if (sort === 'default') {
+        this.goodsListPack = this.goodsList
+      } else if (sort === 'prices') {
+        this.goodsListPack = this.goodsList.sort(this.$_compare('asc', 'price'))
+      } else if (sort === 'evaluate') {
+        this.goodsListPack = this.goodsList.sort(this.$_compare('asc', 'comments', 'score'))
+      } else {
+        this.goodsListPack = this.goodsList
+      }
     }
   }
 }
