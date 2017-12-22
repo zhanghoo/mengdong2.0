@@ -9,7 +9,7 @@
       :style="{ width: navItemWidth }"
       @click="selectType(index)"
       >
-      {{item.type}}
+      {{item.desc}}
       </a>
       <div ref="tabsSlideBar" class="at-slide-bar"></div>
     </div>
