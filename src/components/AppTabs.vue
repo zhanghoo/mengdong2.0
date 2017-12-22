@@ -61,6 +61,11 @@ export default {
     slidePanel (index) {
       return `${this.slotPrefix}${index}`
     }
+  },
+  methods: {
+    selectType (type) {
+      this.shopSwiper.slideTo(type)
+    }
   }
 }
 </script>
