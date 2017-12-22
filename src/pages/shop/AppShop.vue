@@ -17,12 +17,12 @@
 <script>
 import { mapActions } from 'vuex'
 import AppHeader from '@/components/AppHeader'
-import AppShop from '@/components/AppShop'
+import TabsMainGoods from '@/components/TabsMainGoods'
 export default {
   name: 'appShop',
   components: {
     AppHeader,
-    AppShop
+    TabsMainGoods
   },
   created () {
     this.$_showAppNav()
