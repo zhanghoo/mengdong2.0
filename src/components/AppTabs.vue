@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     selectType (type) {
-      this.shopSwiper.slideTo(type)
+      this.swiper.slideTo(type)
     }
   }
 }
