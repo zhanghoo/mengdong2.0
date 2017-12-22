@@ -35,7 +35,7 @@ export default {
         freeMode: true,
         autoHeight: true, //高度随内容变化
         scrollbar: {
-          el: '.swiper-best-scrollbar',
+          el: '.swiper-picked-scrollbar',
           hide: true
         },
         mousewheel: true,
