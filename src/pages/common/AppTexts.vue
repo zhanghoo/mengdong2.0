@@ -9,7 +9,7 @@
       <swiper-slide>
         <div class="texts-cover"></div>
         <div class="texts-box">
-        <h1 class="texts-title">{{article.title}}</h1>
+        <h1 class="texts-title">{{blog.title}}</h1>
         <p class="texts-author"><span class="name">雅一</span></p>
         <div class="texts-content">如果转换成人类的语言，这就是一封告别信。<br><br>如今，我俯卧在你准备的“豪宅”里，顺势跳上你瘦瘦的肩头。时常听你跟人说起，你我是如何气味相投，其实我用这样的方法跳过百余人的肩头，只有你把我带回了家，并认定这是我们的缘分，真是善良而又愚笨的人类。<br><br><img><br><br>我今年九岁，用你们人类的年龄计算，已是耄耋之年。<br><br>最近时常忆起往昔。三岁那年，我交了第一个女朋友，我跟她出去逛了几天，你发现我不在了，慌乱地寻找着我。几天后，我若无其事地带着女朋友回家，你并没有对我们发火，而是拿出来很少给我吃的海鲜鱼罐头招待她。说真的，那一刻我并没有感动，我真想上去挠你，真是要面子呀，平时舍不得给我吃，现在又来充大方。<br><br><img><br><br>后来的后来，我当了爸爸，女朋友把猫崽子们生到了院子里。你把崽子们移到屋内，却被它们的妈妈叼到院子里，几个回合之后，你放弃了。<br><br>崽子们渐渐大了，有一天与它们的妈妈一起消失在院子里，你有些伤心，那一刻我也很伤心，其实，它们想让我一起走，但是我拒绝了，因为比起它们，我觉得或许你更需要我。<br><br>你变得越来越好，开始有男人追，而我也不像小伙子一般精壮，再后来，我开始便秘，有几次甚至拉在了你的床上，你对男朋友尴尬地笑，我看到你佯装生气，还是第一时间带我去医院。<br><br><img><br><br>你们人类常说，如果一个人愿意为你花时间，就证明他爱你，所以，我想，你一定是爱上我了，你这愚蠢的人类。人类常说，我们猫是最势力与精明的动物。或许真的是吧，有时，我很想去找我的家人，可是我突然意识到我的家人不就是你吗？于是，我把伸出窗户的爪子又收了回来，然后踱到你的身边，蜷卧在旁。<br><br>今夜，我有一种睡着永不能再醒来的预感。突然又很羡慕你们人类，如果我是一个人，或许会写一封诗意盎然的告别信，然后潇洒地离开。但是我只是一只猫。我只能用我的呼噜声与你告别。我希望还有力气站起来，走到你的旁边，然后挠你一下当作与你这个笨蛋的告别。<br><br><img><br><br>可是，我现在连翻身都难。所以，别了，我的主人。</div>
         <p class="texts-count">
@@ -24,7 +24,9 @@
               <p class="name">雅一</p>
               <p class="tags">萌懂常驻作家</p>
             </div>
-            <div class="follow"><app-follow-button :isFriend="true"></app-follow-button></div>
+            <div class="follow">
+              <app-button-follow :isFriend="false"/>
+            </div>
           </div>
         </div>
         <div class="texts-articles-list" v-if="textsType === 0">
@@ -112,34 +114,24 @@
 <script>
 import { mapActions } from 'vuex'
 import AppHeader from '@/components/AppHeader'
+import AppButtonFollow from '@/components/AppButtonFollow'
+import axios from 'axios'
 export default {
   name: 'appTexts',
   components: {
-    AppHeader
-  },
-  props: {
-    textsType: {
-      type: Number,
-      default: 3
-    }
+    AppHeader,
+    AppButtonFollow
   },
   data () {
     return {
-      showFlag: false,
+      blog: '',
+      textsType: 3,
       textsSwiperOption: {
         /* eslint-disable */
-        direction: 'vertical',
-        slidesPerView: 'auto',
-        freeMode: true,
-        autoHeight: true, //高度随内容变化
         // scrollbar: {
         //   el: '.swiper-friends-scrollbar',
         //   hide: true
         // },
-        mousewheel: true,
-        roundLengths : true, // 防止文字模糊
-        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
-        observeParents: true, // 修改swiper的父元素时，自动初始化swiper
         // on: {
         //   progress: function(progress) {
         //     console.log(progress)
@@ -151,6 +143,10 @@ export default {
   },
   created () {
     this.$_hideAppNav()
+    axios.get('static/mocks/texts-blog.json').then((res) => {
+      this.blog = res.data.blog
+      this.textsType = this.blog.type
+    })
   },
   methods: {
     ...mapActions({

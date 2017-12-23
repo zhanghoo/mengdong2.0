@@ -11,7 +11,9 @@
         <swiper-slide>
           <swiper :options="swiperPickedOption" class="mg-goods-swiper">
             <swiper-slide>
-              <div style="width: 100%; height: 800px;"></div>
+              <div v-for="picked in shopList.picked" :key="picked.id" class="shop-wrap">
+                <tabs-main-goods-picked-panel :picked="picked" />
+              </div>
             </swiper-slide>
             <div class="swiper-scrollbar swiper-picked-scrollbar" slot="scrollbar"></div>
           </swiper>
@@ -19,7 +21,9 @@
         <swiper-slide>
           <swiper :options="swiperHotOption" class="mg-goods-swiper">
             <swiper-slide>
-              <div style="width: 100%; height: 800px;"></div>
+              <div v-for="hot in shopList.hot" :key="hot.id" class="shop-wrap">
+                <tabs-main-goods-hot-panel :hot="hot" />
+              </div>
             </swiper-slide>
             <div class="swiper-scrollbar swiper-hot-scrollbar" slot="scrollbar"></div>
           </swiper>
@@ -27,7 +31,9 @@
         <swiper-slide>
           <swiper :options="swiperLimitOption" class="mg-goods-swiper">
             <swiper-slide>
-              <div style="width: 100%; height: 800px;"></div>
+              <div v-for="(limit,index) in shopList.limit" :key="limit.id" class="shop-wrap">
+                <tabs-main-goods-limit-panel :limit="limit" :direction="$_setDirection(index)"/>
+              </div>
             </swiper-slide>
             <div class="swiper-scrollbar swiper-limit-scrollbar" slot="scrollbar"></div>
           </swiper>
@@ -38,8 +44,20 @@
 </template>
 
 <script>
+import TabsMainGoodsPickedPanel from '@/components/TabsMainGoodsPickedPanel'
+import TabsMainGoodsHotPanel from '@/components/TabsMainGoodsHotPanel'
+import TabsMainGoodsLimitPanel from '@/components/TabsMainGoodsLimitPanel'
+
 export default {
   name: 'tabsMainGoods',
+  components: {
+    TabsMainGoodsPickedPanel,
+    TabsMainGoodsHotPanel,
+    TabsMainGoodsLimitPanel
+  },
+  props: {
+    shopList: Object
+  },
   data () {
     const self = this
     return {
@@ -47,8 +65,9 @@ export default {
         /* eslint-disable */
         direction: 'horizontal',
         slidesPerView: 1,
-        mousewheel: false,
+        freeMode: false,
         autoHeight: false,
+        mousewheel: false,
         on: {
           slideChangeTransitionStart() {
             self.$refs.tabsMainGoodSlideBar.style.left = `${this.activeIndex * 33.3333}%`
@@ -88,6 +107,9 @@ export default {
     }
   },
   methods: {
+    $_setDirection (index) {
+      return index % 2 === 0 ? 'left' : 'right'
+    },
     selectType (type) {
       this.mainSwiper.slideTo(type)
     }
@@ -149,6 +171,11 @@ export default {
       height: 100%;
       .mg-goods-swiper {
         height: 100%;
+        .shop-wrap {
+          margin-top: 10px;
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }

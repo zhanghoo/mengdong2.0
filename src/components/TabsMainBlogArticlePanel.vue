@@ -1,9 +1,9 @@
 <template>
   <div class="blog-article-panel">
     <p class="article-text-line">ONE STORY</p>
-    <h2 class="article-title">{{article.title}}</h2>
+    <h2 class="article-title" @click.shop="clickArticle">{{article.title}}</h2>
     <p class="article-name"><span>{{article.author}}</span></p>
-    <div class="article-cover"></div>
+    <div class="article-cover" @click.shop="clickArticle"></div>
     <div class="article-contnet">{{article.content}}</div>
     <div class="article-footer">
       <span class="date">{{article.date}}</span>
@@ -20,6 +20,11 @@ export default {
   name: 'tabsMainBlogArticlePanel',
   props: {
     article: Object
+  },
+  methods: {
+    clickArticle () {
+      this.$emit('clickArticle')
+    }
   }
 }
 </script>

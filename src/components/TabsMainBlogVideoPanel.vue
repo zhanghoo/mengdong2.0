@@ -1,9 +1,9 @@
 <template>
   <div class="blog-video-panel">
     <div class="bvp-author">
-      <div class="bvp-avatar"></div>
+      <div class="bvp-avatar" @click.shop="clickAvatar"></div>
       <div class="bvp-user">
-        <p class="bvp-name"><span class="text">咪咪酱</span></p>
+        <p class="bvp-name"><span class="text" @click.shop="clickAvatar">咪咪酱</span></p>
         <p class="bvp-tag"><span class="text">萌宠奴</span></p>
       </div>
       <div class="bvp-follow">
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="bvp-content">我想做的，就是看着它们慢慢得一点点长大。</div>
-    <div class="bvp-cover"></div>
+    <div class="bvp-cover" @click.shop="clickVideo"></div>
     <div class="bvp-footer">
       <span class="bvp-date">今天</span>
       <p class="bvp-count">
@@ -44,6 +44,12 @@ export default {
     },
     cancel () {
       this.isFriend = false
+    },
+    clickVideo () {
+      this.$emit('clickVideo')
+    },
+    clickAvatar () {
+      this.$emit('clickAvatarToUserHome')
     }
   }
 }

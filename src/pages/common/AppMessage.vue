@@ -1,9 +1,9 @@
 <template>
   <div class="app-message">
     <app-header>
-      <span slot="left" class="icon icon-back" @click="back"></span>
+      <span slot="left" class="icon icon-back" @click="back">返回</span>
       <span slot="title">消息中心</span>
-      <span slot="right" class="icon icon-search"></span>
+      <span slot="right"></span>
     </app-header>
     <div class="am-content">
       <swiper class="message-swiper" :options="messageSwiperOption">

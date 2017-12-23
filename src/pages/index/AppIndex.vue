@@ -5,12 +5,12 @@
       <span slot="title">窝</span>
       <span slot="right" class="icon icon-search" @click="show">搜索</span>
     </app-header>
-    <div class="ai-content">
-      <tabs-main-blog :app-list="appList"/>
+    <div class="ai-content" ref="aiContent">
+      <tabs-main-blog :app-list="appList" @top="setTop" @bottom="setBottom"/>
     </div>
     <div class="ai-search-panel" v-show="showFlag">
       <div class="ai-header">
-        <span class="ai-icon-box"><i class="icon icon-search"></i></span>
+        <span class="ai-icon-box"><i class="icon icon-search">搜索</i></span>
         <input class="ai-input" type="text" />
         <a class="ai-cancel" href="javascript:;" @click="hide">取消</a>
       </div>
@@ -40,6 +40,7 @@ import { mapActions } from 'vuex'
 import AppHeader from '@/components/AppHeader'
 import TabsMainBlog from '@/components/TabsMainBlog'
 import axios from 'axios'
+
 export default {
   name: 'appIndex',
   components: {
@@ -67,6 +68,12 @@ export default {
     },
     hide () {
       this.showFlag = false
+    },
+    setTop () {
+      this.$refs.aiContent.style.zIndex = '990'
+    },
+    setBottom () {
+      this.$refs.aiContent.style.zIndex = ''
     }
   }
 }
@@ -75,8 +82,11 @@ export default {
 <style lang="scss">
 @import "../../assets/scss/md";
 .app-index {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   .ai-content {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     padding: 48px 0 58px 0;

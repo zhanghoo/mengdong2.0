@@ -9,7 +9,7 @@
       </template>
     </app-header>
     <div class="as-content">
-       <tabs-main-goods/>
+       <tabs-main-goods :shop-list="shopList"/>
     </div>
   </div>
 </template>
@@ -18,14 +18,24 @@
 import { mapActions } from 'vuex'
 import AppHeader from '@/components/AppHeader'
 import TabsMainGoods from '@/components/TabsMainGoods'
+import axios from 'axios'
+
 export default {
   name: 'appShop',
   components: {
     AppHeader,
     TabsMainGoods
   },
+  data () {
+    return {
+      shopList: {}
+    }
+  },
   created () {
     this.$_showAppNav()
+    axios.get('static/mocks/goods-main.json').then((res) => {
+      this.shopList = res.data
+    })
   },
   methods: {
     ...mapActions({

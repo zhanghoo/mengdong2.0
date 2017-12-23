@@ -10,7 +10,16 @@
         <swiper-slide>
           <swiper :options="swiperDogOption" class="gs-goods-swiper">
             <swiper-slide>
-              <div style="width: 100%; height: 1200px;"></div>
+              <ul class="shop-pet-type-list">
+                <li v-for="type in goodsSupertypeList.dogs" :key="type.id" class="shop-pettype-item" @click.stop="toGoodsSubtype">
+                  <div class="shop-pet-type-cover"></div>
+                  <div class="shop-pet-type-intro">
+                    <p><span class="shop-pet-type-icon" :class="type.icon"></span></p>
+                    <span class="shop-pet-type-title">{{type.title}}</span>
+                    <p class="shop-pet-type-desc">{{type.desc}}</p>
+                  </div>
+                </li>
+              </ul>
             </swiper-slide>
             <div class="swiper-scrollbar swiper-dog-scrollbar" slot="scrollbar"></div>
           </swiper>
@@ -18,7 +27,16 @@
         <swiper-slide>
           <swiper :options="swiperCatOption" class="gs-goods-swiper">
             <swiper-slide>
-              <div style="width: 100%; height: 1200px;"></div>
+              <ul class="shop-pet-type-list">
+                <li v-for="type in goodsSupertypeList.cats" :key="type.id" class="shop-pettype-item" @click.stop="toGoodsSubtype">
+                  <div class="shop-pet-type-cover"></div>
+                  <div class="shop-pet-type-intro">
+                    <p><span class="shop-pet-type-icon" :class="type.icon"></span></p>
+                    <span class="shop-pet-type-title">{{type.title}}</span>
+                    <p class="shop-pet-type-desc">{{type.desc}}</p>
+                  </div>
+                </li>
+              </ul>
             </swiper-slide>
             <div class="swiper-scrollbar swiper-cat-scrollbar" slot="scrollbar"></div>
           </swiper>
@@ -31,6 +49,9 @@
 <script>
 export default {
   name: 'tabsGoodsSupertype',
+  props: {
+    goodsSupertypeList: Object
+  },
   data () {
     const self = this
     return {
@@ -38,8 +59,9 @@ export default {
         /* eslint-disable */
         direction: 'horizontal',
         slidesPerView: 1,
-        mousewheel: false,
+        freeMode: false,
         autoHeight: false,
+        mousewheel: false,
         on: {
           slideChangeTransitionStart() {
             self.$refs.tabsGoodsSupertypeSlideBar.style.left = `${this.activeIndex * 50}%`
@@ -73,6 +95,9 @@ export default {
   methods: {
     selectType (type) {
       this.mainSwiper.slideTo(type)
+    },
+    toGoodsSubtype () {
+      this.$router.push('goodssubtype')
     }
   }
 }
@@ -132,6 +157,72 @@ export default {
       height: 100%;
       .gs-goods-swiper {
         height: 100%;
+        .shop-pet-type-list {
+          padding: 5px;
+          width: 100%;
+          height: auto;
+          &:after{
+            content: '.';
+            display: block;
+            height: 0;
+            line-height: 0;
+            clear: both;
+            visibility: hidden;
+          }
+          .shop-pettype-item {
+            float: left;
+            padding: 5px;
+            width: 50%;
+            height: auto;
+            text-align: center;
+            .shop-pet-type-cover {
+              padding-top: 100%;
+              width: 100%;
+              height: 0;
+              background: #ccc;
+            }
+            .shop-pet-type-intro {
+              padding: 15px 0;
+              background: #fff;
+              border: 1px solid #f1f1f1;
+              .shop-pet-type-icon {
+                display: block;
+                margin: 0 auto 10px;
+                width: 30px;
+                height: 30px;
+                background: #ccc;
+              }
+              .shop-pet-type-title {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 16px;
+                line-height: 16px;
+                font-size: 14px;
+                font-weight: 700;
+                &:before,
+                &:after {
+                  content: '';
+                  display: block;
+                  position: absolute;
+                  top: 6px;
+                  left: -8px;
+                  width: 6px;
+                  height: 0;
+                  border-bottom: 2px solid #333;
+                }
+                &:after {
+                  left: auto;
+                  right: -8px;
+                }
+              }
+              .shop-pet-type-desc {
+                font-size: 12px;
+                color: #ccc
+              }
+            }
+          }
+        }
       }
     }
   }

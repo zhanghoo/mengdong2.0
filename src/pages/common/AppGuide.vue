@@ -40,7 +40,11 @@ export default {
       btnShow: false,
       guideSwiperOption: {
         /* eslint-disable */
-        autoplay: false,
+        direction: 'horizontal',
+        slidesPerView: 1,
+        mousewheel: false,
+        freeMode: false,
+        autoHeight: false,
         pagination: {
           el: '.swiper-pagination',
           clickable: true,

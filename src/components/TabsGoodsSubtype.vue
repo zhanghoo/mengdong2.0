@@ -11,9 +11,9 @@
           <swiper-slide class="agsu-slide">
             <ul class="agsu-goods-list clearfix">
               <li v-for="goods in goodsList" :key="goods.id" class="agsu-item">
-                <div class="agsu-goods-cover"></div>
+                <div class="agsu-goods-cover" @click.stop="topGoods"></div>
                 <div class="agsu-goods-info">
-                  <p class="agsu-goods-title">{{goods.title}}</p>
+                  <p class="agsu-goods-title" @click.stop="topGoods">{{goods.title}}</p>
                   <p class="agsu-goods-price">{{goods.price}}</p>
                 </div>
               </li>
@@ -27,6 +27,7 @@
 
 <script>
 import axios from 'axios'
+
 export default {
   name: 'tabsGoodsSubtype',
   data () {
@@ -75,6 +76,9 @@ export default {
       } else {
         this.goodsListPack = this.goodsList
       }
+    },
+    topGoods () {
+      this.$router.push('goods')
     }
   }
 }

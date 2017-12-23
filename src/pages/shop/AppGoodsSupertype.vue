@@ -6,7 +6,7 @@
       <span slot="right" class="icon icon-cart" @click="toCart">购物车</span>
     </app-header>
     <div class="ags-content">
-      <tabs-goods-supertype/>
+      <tabs-goods-supertype :goods-supertype-list="goodsSupertypeList"/>
     </div>
   </div>
 </template>
@@ -15,14 +15,24 @@
 import { mapActions } from 'vuex'
 import AppHeader from '@/components/AppHeader'
 import TabsGoodsSupertype from '@/components/TabsGoodsSupertype'
+import axios from 'axios'
+
 export default {
   name: 'appGoodsSupertype',
   components: {
     AppHeader,
     TabsGoodsSupertype
   },
+  data () {
+    return {
+      goodsSupertypeList: {}
+    }
+  },
   created () {
     this.$_hideAppNav()
+    axios.get('static/mocks/goods-type.json').then((res) => {
+      this.goodsSupertypeList = res.data
+    })
   },
   methods: {
     ...mapActions({

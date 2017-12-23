@@ -24,6 +24,7 @@ npm install sass-loader node-sass webpack --save-dev
 npm install vue-awesome-swiper --save
 npm install normalize.css --save
 npm install vue-awesome --save
+npm install vue-wechat-title --save
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

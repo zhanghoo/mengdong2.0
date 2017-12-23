@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div class="app-content">
-      <router-view/>
+      <router-view v-wechat-title="$route.meta.title"/>
     </div>
     <div v-if="navShowFlag" class="app-nav">
       <div class="app-nav-item">
@@ -70,7 +70,9 @@ export default {
 @import "assets/scss/md";
 .app {
   .app-content {
-    position: relative;
+    position: absolute;
+    width: 100%;
+    height: 100%;
   }
   .app-nav {
     position: fixed;

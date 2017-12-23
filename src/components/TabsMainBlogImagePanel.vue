@@ -1,11 +1,11 @@
 <template>
   <div class="blog-image-panel">
-    <div class="image-cover">
+    <div class="image-cover" @click.shop="clickImage">
       <span class="img-num">+5</span>
     </div>
     <div class="image-author">
-      <div class="avatar"></div>
-      <div class="name"><span class="text">暴走的短腿猫</span></div>
+      <div class="avatar" @click.shop="clickAvatar"></div>
+      <div class="name"><span class="text" @click.shop="clickAvatar">暴走的短腿猫</span></div>
     </div>
     <div class="image-content">他们说，猫是不恋家的，最后会决绝离开。</div>
     <div class="image-footer">
@@ -23,6 +23,14 @@ export default {
   name: 'tabsMainBlogImagePanel',
   props: {
     image: Object
+  },
+  methods: {
+    clickImage () {
+      this.$emit('clickImage')
+    },
+    clickAvatar () {
+      this.$emit('clickAvatarToUserHome')
+    }
   }
 }
 </script>

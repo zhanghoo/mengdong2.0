@@ -7,6 +7,7 @@ import store from './store'
 import 'normalize.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
+import VueWechatTitle from 'vue-wechat-title'
 // Vue.use(VueAwesomeSwiper, /* { default global options } */)
 
 const swiperOptions = {
@@ -24,6 +25,7 @@ const swiperOptions = {
   /* eslint-enable */
 }
 
+Vue.use(VueWechatTitle)
 Vue.use(VueAwesomeSwiper, swiperOptions)
 
 Vue.config.productionTip = false

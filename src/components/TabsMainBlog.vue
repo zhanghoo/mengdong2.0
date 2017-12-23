@@ -1,60 +1,96 @@
 <template>
-  <div class="tabs-main-blog">
+  <div class="tabs-main-blog" :class="[role]">
     <div class="tmb-nav">
       <a href="javascript:;" class="tmb-nav-item" @click="selectType(0)">
         <div>
           <span class="icon icon-article"></span>
-          <p class="text">文章</p>
+          <p class="num" v-show="!showBlog">{{articlesNum}}</p>
+          <p class="text" :class="{ sm : !showBlog }">文章</p>
         </div>
       </a>
       <a href="javascript:;" class="tmb-nav-item" @click="selectType(1)">
         <div>
           <span class="icon icon-image"></span>
-          <p class="text">图片</p>
+          <p class="num" v-show="!showBlog">{{imagesNum}}</p>
+          <p class="text" :class="{ sm : !showBlog }">图片</p>
         </div>
       </a>
       <a href="javascript:;" class="tmb-nav-item" @click="selectType(2)">
         <div>
           <span class="icon icon-video"></span>
-          <p class="text">视频</p>
+          <p class="num" v-show="!showBlog">{{videosNum}}</p>
+          <p class="text" :class="{ sm : !showBlog }">视频</p>
         </div>
       </a>
-      <div ref="tabsMainBlogSlideBar" class="tmb-slide-bar"></div>
+      <div v-show="showBlog" ref="tabsMainBlogSlideBar" class="tmb-slide-bar"></div>
     </div>
-    <div class="tmb-content">
+    <div class="tmb-content" v-if="showBlog">
       <swiper class="main-swiper" :options="mainSwiperOption" ref="mainSwiper">
-        <swiper-slide>
-          <swiper :options="swiperArticleOption" class="text-swiper">
-            <swiper-slide>
-              <div v-for="article in appList.articles" @click.stop="clickArticle(article)" :key="article.id">
-                <tabs-main-blog-article-panel :article="article" />
-              </div>
-            </swiper-slide>
-            <div class="swiper-scrollbar swiper-article-scrollbar" slot="scrollbar"></div>
-          </swiper>
+        <swiper-slide class="main-slide">
+          <template v-if="mainSlide">
+            <swiper :options="swiperArticleOption" class="text-swiper">
+              <swiper-slide>
+                <div v-for="article in appList.articles" :key="article.id">
+                  <tabs-main-blog-article-panel :article="article" 
+                                                @clickArticle="clickArticle(article)"/>
+                </div>
+              </swiper-slide>
+              <div class="swiper-scrollbar swiper-article-scrollbar" slot="scrollbar"></div>
+            </swiper>
+          </template>
+          <template v-else>
+            <div v-for="article in appList.articles" :key="article.id">
+              <tabs-main-blog-article-panel :article="article" 
+                                            @clickArticle="clickArticle(article)"/>
+            </div>
+          </template>
         </swiper-slide>
-        <swiper-slide>
-          <swiper :options="swiperImageOption" class="text-swiper">
-            <swiper-slide>
-              <div v-for="image in appList.images" @click.stop="clickImage(image)" :key="image.id">
-                <tabs-main-blog-image-panel :image="image" />
-              </div>
-            </swiper-slide>
-            <div class="swiper-scrollbar swiper-image-scrollbar" slot="scrollbar"></div>
-          </swiper>
+        <swiper-slide class="main-slide">
+          <template v-if="mainSlide">
+            <swiper :options="swiperImageOption" class="text-swiper">
+              <swiper-slide>
+                <div v-for="image in appList.images" :key="image.id">
+                  <tabs-main-blog-image-panel :image="image" 
+                                              @clickImage="clickImage(image)"
+                                              @clickAvatarToUserHome="clickAvatarToUserHome"/>
+                </div>
+              </swiper-slide>
+              <div class="swiper-scrollbar swiper-image-scrollbar" slot="scrollbar"></div>
+            </swiper>
+          </template>
+          <template v-else>
+            <div v-for="image in appList.images" :key="image.id">
+              <tabs-main-blog-image-panel :image="image" 
+                                          @clickImage="clickImage(image)"
+                                          @clickAvatarToUserHome="clickAvatarToUserHome"/>
+            </div>
+          </template>
         </swiper-slide>
-        <swiper-slide>
-          <swiper :options="swiperVideoOption" class="text-swiper">
-            <swiper-slide>
-              <div v-for="video in appList.videos" @click.stop="clickVideo(video)" :key="video.id">
-                <tabs-main-blog-video-panel :video="video" />
-              </div>
-            </swiper-slide>
-            <div class="swiper-scrollbar swiper-video-scrollbar" slot="scrollbar"></div>
-          </swiper>
+        <swiper-slide class="main-slide">
+          <template v-if="mainSlide">
+            <swiper :options="swiperVideoOption" class="text-swiper">
+              <swiper-slide>
+                <div v-for="video in appList.videos" :key="video.id">
+                  <tabs-main-blog-video-panel :video="video"
+                                              @clickVideo="clickVideo(video)"
+                                              @clickAvatarToUserHome="clickAvatarToUserHome" />
+                </div>
+              </swiper-slide>
+              <div class="swiper-scrollbar swiper-video-scrollbar" slot="scrollbar"></div>
+            </swiper>
+          </template>
+          <template v-else>
+            <div v-for="video in appList.videos" :key="video.id">
+              <tabs-main-blog-video-panel :video="video"
+                                          @clickVideo="clickVideo(video)"
+                                          @clickAvatarToUserHome="clickAvatarToUserHome" />
+            </div>
+          </template>
         </swiper-slide>
       </swiper>
     </div>
+    <app-dialog-image v-if="showBlog" ref="tmbImage" :image="selectedImage" @contenIBottom="contenBottom"/>
+    <app-dialog-video v-if="showBlog" ref="tmbVideo" :video="selectedVideo" @contenVBottom="contenBottom"/>
   </div>
 </template>
 
@@ -62,19 +98,36 @@
 import TabsMainBlogArticlePanel from '@/components/TabsMainBlogArticlePanel'
 import TabsMainBlogImagePanel from '@/components/TabsMainBlogImagePanel'
 import TabsMainBlogVideoPanel from '@/components/TabsMainBlogVideoPanel'
+import AppDialogImage from '@/components/AppDialogImage'
+import AppDialogVideo from '@/components/AppDialogVideo'
 
 export default {
   name: 'tabsMainBlog',
   components: {
     TabsMainBlogArticlePanel,
     TabsMainBlogImagePanel,
-    TabsMainBlogVideoPanel
+    TabsMainBlogVideoPanel,
+    AppDialogImage,
+    AppDialogVideo
   },
   props: {
-    appList: Object
+    appList: Object,
+    showBlog: {
+      type: Boolean,
+      default: true
+    },
+    role: {
+      type: String,
+      default: 'index'
+    },
+    mainSlide: {
+      type: Boolean,
+      default: true
+    }
   },
   data () {
     const self = this
+    const autoHeight = !this.mainSlide
     return {
       textsType: 0,
       selectedArticle: {},
@@ -85,10 +138,17 @@ export default {
         direction: 'horizontal',
         slidesPerView: 1,
         mousewheel: false,
-        autoHeight: false,
+        autoHeight: autoHeight,
+        freeMode: false,
         on: {
           slideChangeTransitionStart() {
             self.$refs.tabsMainBlogSlideBar.style.left = `${this.activeIndex * 33.3333}%`
+          },
+          slideChangeTransitionEnd() {
+            if (!self.mainSlide && self.role === 'user') {
+              // mainSwiper 不能滑动, 且是 userhome 时 触发 userhome的 homeUserSwiper 重新计算高度
+              self.outSwiperSwiperUpdate()
+            }
           }
         }
         /* eslint-enable */
@@ -122,24 +182,48 @@ export default {
   computed: {
     mainSwiper () {
       return this.$refs.mainSwiper.swiper
+    },
+    articlesNum () {
+      return this.appList.articles ? this.appList.articles.length : 0
+    },
+    imagesNum () {
+      return this.appList.images ? this.appList.images.length : 0
+    },
+    videosNum () {
+      return this.appList.videos ? this.appList.videos.length : 0
     }
   },
   methods: {
     clickArticle (article) {
-      this.selectedArticle = article
+      this.$router.push('texts')
+      // this.selectedArticle = article
       // this.textsType = 0
       // this.$refs.article.show()
     },
     clickImage (image) {
       this.selectedImage = image
-      // this.$refs.image.show()
+      this.$emit('top')
+      this.$refs.tmbImage.show()
     },
     clickVideo (video) {
       this.selectedVideo = video
-      // this.$refs.video.show()
+      this.$emit('top')
+      this.$refs.tmbVideo.show()
+    },
+    clickAvatarToUserHome () {
+      this.$router.push('userhome')
     },
     selectType (type) {
-      this.mainSwiper.slideTo(type)
+      if (this.showBlog) {
+        this.mainSwiper.slideTo(type)
+      }
+    },
+    contenBottom () {
+      this.$emit('bottom')
+    },
+    outSwiperSwiperUpdate () {
+      // console.log('out swiper update')
+      this.$emit('swiperUpdate')
     }
   }
 }
@@ -148,6 +232,11 @@ export default {
 <style lang="scss">
 @import "../assets/scss/md";
 .tabs-main-blog {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   .tmb-nav {
     position: relative;
     display: flex;
@@ -186,7 +275,7 @@ export default {
       bottom: 0;
       left: 0;
       width: 33.3333%;
-      height: 2px;
+      height: 3px;
       background: transparent;
       transition: left .2s ease;
       &:after {
@@ -202,19 +291,30 @@ export default {
     }
   }
   .tmb-content {
-    position: fixed;
-    padding: 136px 0 58px;
+    position: absolute;
+    padding: 88px 0 0;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
     z-index: 10;
-    background: $slideBgColor;
     .main-swiper {
       height: 100%;
+      background: $slideBgColor;
       .text-swiper {
         height: 100%;
+      }
+    }
+  }
+  &.user {
+    .tmb-content {
+      position: relative;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      .main-slide {
+        padding: 0 0 10px 0;
       }
     }
   }

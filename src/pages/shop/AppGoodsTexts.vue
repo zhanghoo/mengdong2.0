@@ -1,19 +1,20 @@
 <template>
-  <div class="app-goods">
+  <div class="goods-texts">
     <app-header :is-transparent="true">
       <span slot="left" class="icon icon-back" @click="back">返回</span>
-      <span slot="title">个性印花纯棉小T</span>
-      <span slot="right" class="icon icon-back">分享</span>
+      <span slot="title">如果我是一个人，或许会写一封诗意盎然的告别信，然后潇洒地离开</span>
+      <span slot="right"></span>
     </app-header>
-    <div class="ag-content">商品页</div>
+    <div class="gt">商品清单</div>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import AppHeader from '@/components/AppHeader'
+
 export default {
-  name: 'appGoods',
+  name: 'appGoodsTexts',
   components: {
     AppHeader
   },
@@ -32,8 +33,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/scss/md";
-.app-goods {
-
+.goods-texts {
+  
 }
 </style>
