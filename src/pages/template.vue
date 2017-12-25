@@ -3,7 +3,7 @@
 </template>
 
 <script>
-mport { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: '',
   created () {

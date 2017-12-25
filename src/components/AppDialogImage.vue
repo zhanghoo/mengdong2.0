@@ -38,15 +38,16 @@ export default {
     return {
       showFlag: false,
       imageSwiperOption: {
+        /* eslint-disable */
         direction: 'horizontal',
         slidesPerView: 1,
-        clickable: true,
         freeMode: false,
         mousewheel: false,
         autoHeight: false,
         pagination: {
           el: '.image-swiper-pagination'
         }
+        /* eslint-enable */
       }
     }
   },
@@ -108,7 +109,10 @@ export default {
             width: 100%;
             height: 100%;
             .swiper-slide {
+              width: 100%;
+              height: 100%;
               @include centerH();
+              background: $bgColor;
             }
             .image-swiper-pagination {
               bottom: 5px;

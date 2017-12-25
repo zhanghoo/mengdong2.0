@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'AppPanelSlideMenu',
+  name: 'appPanelSlideMenu',
   props: {
     msg: Object
   },
