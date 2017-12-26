@@ -1,0 +1,170 @@
+{
+    "picked": [
+        {
+            "id": 0,
+            "theme": "秋天到了",
+            "title": "你真的知道怎样预防爱宠流感吗？",
+            "cover": "",
+            "content": "",
+            "date": "2017-12-15",
+            "goods": [
+                {
+                    "id": 0,
+                    "title": "商品1",
+                    "cover": "",
+                    "price": 60.00,
+                    "url": ""
+                },
+                {
+                    "id": 1,
+                    "title": "商品2",
+                    "cover": "",
+                    "price": 90.00,
+                    "url": ""
+                },
+                {
+                    "id": 2,
+                    "title": "商品3",
+                    "cover": "",
+                    "price": 230.00,
+                    "url": ""
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "theme": "喵喵物语",
+            "title": "我不是喜欢孤单，而是没人陪我玩",
+            "cover": "",
+            "content": "",
+            "date": "2017-12-15",
+            "goods": [
+                {
+                    "id": 0,
+                    "title": "商品4",
+                    "cover": "",
+                    "price": 60.00,
+                    "url": ""
+                },
+                {
+                    "id": 1,
+                    "title": "商品5",
+                    "cover": "",
+                    "price": 20.00,
+                    "url": ""
+                },
+                {
+                    "id": 2,
+                    "title": "商品6",
+                    "cover": "",
+                    "price": 120.00,
+                    "url": ""
+                },
+                {
+                    "id": 3,
+                    "title": "商品7",
+                    "cover": "",
+                    "price": 120.00,
+                    "url": ""
+                }
+            ]
+        }
+    ],
+    "hot": [
+        {
+            "id": 0,
+            "theme": "秋冬好物",
+            "title": "爱它就给它想要的",
+            "cover": "",
+            "content": "",
+            "date": "2017-12-15",
+            "goods": [
+                {
+                    "id": 0,
+                    "title": "商品8",
+                    "cover": "",
+                    "price": 60.00,
+                    "url": ""
+                },
+                {
+                    "id": 1,
+                    "title": "商品9",
+                    "cover": "",
+                    "price": 90.00,
+                    "url": ""
+                },
+                {
+                    "id": 2,
+                    "title": "商品10",
+                    "cover": "",
+                    "price": 230.00,
+                    "url": ""
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "theme": "萌宠洗浴",
+            "title": "夏天就要干干净净和它玩",
+            "cover": "",
+            "content": "",
+            "date": "2017-12-15",
+            "goods": [
+                {
+                    "id": 0,
+                    "title": "商品11",
+                    "cover": "",
+                    "price": 60.00,
+                    "url": ""
+                },
+                {
+                    "id": 1,
+                    "title": "商品12",
+                    "cover": "",
+                    "price": 20.00,
+                    "url": ""
+                },
+                {
+                    "id": 2,
+                    "title": "商品13",
+                    "cover": "",
+                    "price": 120.00,
+                    "url": ""
+                },
+                {
+                    "id": 3,
+                    "title": "商品14",
+                    "cover": "",
+                    "price": 120.00,
+                    "url": ""
+                }
+            ]
+        }
+    ],
+    "limit": [
+        {
+            "id": 0,
+            "title": "白色经典套夹",
+            "leftTime": "2",
+            "newPrice": "80.00",
+            "oldPrice": "120.00",
+            "cover": ""
+        },
+        {
+            "id": 1,
+            "title": "绅士大框墨镜",
+            "leftTime": "4",
+            "newPrice": "260.00",
+            "oldPrice": "280.00",
+            "cover": ""
+        },
+        {
+            "id": 2,
+            "title": "时尚个性狗链",
+            "leftTime": "3",
+            "newPrice": "120.00",
+            "oldPrice": "160.00",
+            "cover": ""
+        }
+    ]
+}

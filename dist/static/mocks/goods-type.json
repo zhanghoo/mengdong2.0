@@ -1,0 +1,158 @@
+{
+    "dogs": [
+        {
+            "id": 0,
+            "icon": "icon-clothe",
+            "title": "汪汪潮服",
+            "desc": "让爱宠和你一样时髦",
+            "goodsList": [
+                {
+                    "id": 0,
+                    "cover": "",
+                    "title": "个性印花纯棉小T",
+                    "price": "80.00",
+                    "comments": "120",
+                    "score": "4.5"
+                },
+                {
+                    "id": 1,
+                    "cover": "",
+                    "title": "保暖毛线围脖",
+                    "price": "60.00",
+                    "comments": "130",
+                    "score": "4.5"
+                },
+                {
+                    "id": 2,
+                    "cover": "",
+                    "title": "加绒舒适卫衣",
+                    "price": "120.00",
+                    "comments": "110",
+                    "score": "4"
+                },
+                {
+                    "id": 3,
+                    "cover": "",
+                    "title": "名媛气质毛衣",
+                    "price": "180.00",
+                    "comments": "90",
+                    "score": "3"
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "icon": "icon-ornament",
+            "title": "可爱饰品",
+            "desc": "让你的它萌上加萌",
+            "goodsList": [
+                {
+                    "id": 0,
+                    "cover": "",
+                    "title": "个性印花纯棉小T",
+                    "price": "80.00",
+                    "comments": "120",
+                    "score": "4.5"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "icon": "icon-footds",
+            "title": "零食奖励",
+            "desc": "像妈妈一样给它奖励吧",
+            "goodsList": [
+                {
+                    "id": 0,
+                    "cover": "",
+                    "title": "个性印花纯棉小T",
+                    "price": "80.00",
+                    "comments": "120",
+                    "score": "4.5"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "icon": "icon-bath",
+            "title": "乖乖洗浴",
+            "desc": "干干净净才好玩呢",
+            "goodsList": [
+                {
+                    "id": 0,
+                    "cover": "",
+                    "title": "个性印花纯棉小T",
+                    "price": "80.00",
+                    "comments": "120",
+                    "score": "4.5"
+                }
+            ]
+        }
+    ],
+    "cats": [
+        {
+            "id": 0,
+            "icon": "icon-clothe",
+            "title": "喵喵潮服",
+            "desc": "让爱宠和你一样时髦",
+            "goodsList": [
+                {
+                    "id": 0,
+                    "cover": "",
+                    "title": "个性印花纯棉小T",
+                    "price": "80.00",
+                    "comments": "120",
+                    "score": "4.5"
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "icon": "icon-ornament",
+            "title": "可爱饰品",
+            "desc": "让你的它萌上加萌",
+            "goodsList": [
+                {
+                    "id": 0,
+                    "cover": "",
+                    "title": "个性印花纯棉小T",
+                    "price": "80.00",
+                    "comments": "120",
+                    "score": "4.5"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "icon": "icon-footds",
+            "title": "零食奖励",
+            "desc": "像妈妈一样给它奖励吧",
+            "goodsList": [
+                {
+                    "id": 0,
+                    "cover": "",
+                    "title": "个性印花纯棉小T",
+                    "price": "80.00",
+                    "comments": "120",
+                    "score": "4.5"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "icon": "icon-bath",
+            "title": "乖乖洗浴",
+            "desc": "干干净净才好玩呢",
+            "goodsList": [
+                {
+                    "id": 0,
+                    "cover": "",
+                    "title": "个性印花纯棉小T",
+                    "price": "80.00",
+                    "comments": "120",
+                    "score": "4.5"
+                }
+            ]
+        }
+    ]
+}

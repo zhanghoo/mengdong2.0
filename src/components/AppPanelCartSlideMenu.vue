@@ -7,7 +7,7 @@
             <app-checkbox />
           </div>
           <div class="acsm-cover"><div class="img"></div></div>
-          <div class="acsm-goods">
+          <div class="acsm-goods" @click.stop="toGoods">
             <h3 class="acsm-title">{{goods.title}}</h3>
             <div class="acsm-info" v-for="(info,index) in goods.info" :key="index">
               <p class="acsmi-desc">{{info.desc}}：</p>
@@ -51,6 +51,11 @@ export default {
         /* eslint-enable */
       }
     }
+  },
+  methods: {
+    toGoods () {
+      this.$router.push('goods')
+    }
   }
 }
 </script>
@@ -67,6 +72,7 @@ export default {
       width: 100%;
       height: 80px;
       .acsm-goods-panel {
+        position: relative;
         display: flex;
         width: 100%;
         height: 80px;
@@ -111,6 +117,11 @@ export default {
             color: $mainColor;
             font-weight: 700;
           }
+        }
+        .acsm-num {
+          position: absolute;
+          bottom: 10px;
+          right: 10px;
         }
       }
     }
