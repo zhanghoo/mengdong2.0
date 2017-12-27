@@ -54,6 +54,15 @@
         <!-- <div class="swiper-scrollbar swiper-cart-scrollbar" slot="scrollbar"></div> -->
       </swiper>
     </div>
+    <div class="ac-footer">
+      <div class="ac-check-count">
+        <app-checkbox :select-all="true"/>
+        <span v-show="goodsSelectedNum > 0" class="ac-count-desc">不含运费</span>
+        <span class="acc-text">总计：</span>
+        <span class="acc-num">{{goodsCount}}</span>
+      </div>
+      <div class="ac-account" :class="goodsSelectedNum > 0 ? 'on' : ''">去结算</div>
+    </div>
   </div>
 </template>
 
@@ -62,12 +71,14 @@ import { mapActions } from 'vuex'
 import AppHeader from '@/components/AppHeader'
 import AppPanelCartSlideMenu from '@/components/AppPanelCartSlideMenu'
 import axios from 'axios'
+import AppCheckbox from '@/components/AppCheckbox'
 
 export default {
   name: 'appCart',
   components: {
     AppHeader,
-    AppPanelCartSlideMenu
+    AppPanelCartSlideMenu,
+    AppCheckbox
   },
   data () {
     return {
@@ -88,6 +99,15 @@ export default {
   computed: {
     cartNotEmpty () {
       return !this.cartEmpty
+    },
+    goodsNum () {
+      return this.goodsCartList.length
+    },
+    goodsSelectedNum () {
+      return this.selected.length
+    },
+    goodsCount () {
+      return '0.00'
     }
   },
   created () {
@@ -122,7 +142,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 48px 0 0 0;
+    padding: 48px 0 48px 0;
     width: 100%;
     height: 100%;
     background: $slideBgColor;
@@ -244,6 +264,45 @@ export default {
             }
           }
         }
+      }
+    }
+  }
+  .ac-footer {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    justify-content: space-between;
+    .ac-check-count {
+      @include centerH();
+      padding-left: 16px;
+      height: 48px;
+      line-height: 48px;
+      .ac-count-desc {
+        margin-left: 20px;
+        height: 48px;
+        font-size: 10px;
+        color: #ccc;
+      }
+      .acc-text {
+        margin-left: 6px;
+        font-size: 12px;
+      }
+      .acc-num {
+        color: $mainColor;
+        font-size: 16px;
+        font-weight: 700;
+      }
+    }
+    .ac-account {
+      width: 100px;
+      text-align: center;
+      background: $mainColor;
+      &.on {
+        background: $mainDColor;
       }
     }
   }
