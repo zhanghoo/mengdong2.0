@@ -44,7 +44,7 @@ export default {
   height: 48px;
   line-height: 48px;
   background: $mainColor;
-  transition: background 1s linear;
+  transition: background .5s ease;
   &.transparent {
     background: transparent;
   }
@@ -58,7 +58,7 @@ export default {
     text-align: center;
     color: #fff;
     @include text-ellipsis();
-    transition: color 1s linear;
+    transition: color 1s ease;
     &.transparent {
       color: transparent;
     }

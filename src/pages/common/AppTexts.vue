@@ -1,11 +1,11 @@
 <template>
   <div class="app-texts">
-    <app-header :is-transparent="true">
+    <app-header :is-transparent="isTransparent">
       <span slot="left" class="icon icon-back" @click="back">返回</span>
       <span slot="title">如果我是一个人，或许会写一封诗意盎然的告别信，然后潇洒地离开</span>
       <span slot="right"></span>
     </app-header>
-    <swiper class="texts-swiper" :options="textsSwiperOption">
+    <swiper class="texts-swiper" :options="textsSwiperOption" ref="textsSwiper">
       <swiper-slide>
         <div class="texts-cover"></div>
         <div class="texts-box">
@@ -123,22 +123,33 @@ export default {
     AppButtonFollow
   },
   data () {
+    const self = this
     return {
       blog: '',
       textsType: 3,
+      isTransparent: true,
       textsSwiperOption: {
         /* eslint-disable */
         // scrollbar: {
         //   el: '.swiper-friends-scrollbar',
         //   hide: true
         // },
-        // on: {
-        //   progress: function(progress) {
-        //     console.log(progress)
-        //   }
-        // }
+        on: {
+          touchMove: function() {
+            if (this.translate <= -48 && self.isTransparent) {
+              self.isTransparent = false
+            } else if (this.translate > -48 && !self.isTransparent) {
+              self.isTransparent = true
+            }
+          }
+        }
         /* eslint-enable */
       }
+    }
+  },
+  computed: {
+    textsSwiper () {
+      return this.$refs.textsSwiper.swiper
     }
   },
   created () {

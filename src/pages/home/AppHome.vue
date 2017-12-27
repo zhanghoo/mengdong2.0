@@ -1,6 +1,6 @@
 <template>
   <div class="app-home">
-    <app-header :is-transparent="true">
+    <app-header :is-transparent="isTransparent">
       <span slot="left"></span>
       <span slot="title">小菜菜</span>
       <span slot="right" class="icon icon-set">设置</span>
@@ -56,15 +56,26 @@ export default {
     TabsMainBlog
   },
   data () {
+    const self = this
     return {
       mineList: {},
       showBlogFlag: false,
+      isTransparent: true,
       homeSwiperOption: {
         /* eslint-disable */
         // scrollbar: {
         //   el: '.swiper-home-scrollbar',
         //   hide: true
         // }
+        on: {
+          touchMove: function() {
+            if (this.translate <= -48 && self.isTransparent) {
+              self.isTransparent = false
+            } else if (this.translate > -48 && !self.isTransparent) {
+              self.isTransparent = true
+            }
+          }
+        }
         /* eslint-enable */
       }
     }

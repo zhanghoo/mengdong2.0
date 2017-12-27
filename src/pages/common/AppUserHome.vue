@@ -1,6 +1,6 @@
 <template>
   <div class="app-user-home">
-    <app-header :is-transparent="true">
+    <app-header :is-transparent="isTransparent">
       <span slot="left" class="icon icon-back" @click="back">返回</span>
       <span slot="title">小菜菜</span>
       <span slot="right"></span>
@@ -32,14 +32,25 @@ export default {
     TabsMainBlog
   },
   data () {
+    const self = this
     return {
       userList: {},
+      isTransparent: true,
       homeUserSwiperOption: {
         /* eslint-disable */
         // scrollbar: {
         //   el: '.swiper-user-home-scrollbar',
         //   hide: true
         // }
+        on: {
+          touchMove: function() {
+            if (this.translate <= -48 && self.isTransparent) {
+              self.isTransparent = false
+            } else if (this.translate > -48 && !self.isTransparent) {
+              self.isTransparent = true
+            }
+          }
+        }
         /* eslint-enable */
       }
     }
