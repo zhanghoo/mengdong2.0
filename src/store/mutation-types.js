@@ -1,3 +1,4 @@
 export const SET_GUIDE_STATUS = 'SET_GUIDE_STATUS'
 export const SET_LOGIN_STATUS = 'SET_LOGIN_STATUS'
 export const SET_APP_NAV_SHOW = 'SET_APP_NAV_SHOW'
+export const ADD_TO_CART = 'ADD_TO_CART'
