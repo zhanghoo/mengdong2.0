@@ -4,7 +4,8 @@ import * as actions from './actions'
 import * as getters from './getters'
 import state from './state'
 import mutations from './mutations'
-import index from './modules/index'
+import cart from './modules/cart'
+import goods from './modules/goods'
 import createLogger from 'vuex/dist/logger'
 
 Vue.use(Vuex)
@@ -17,7 +18,8 @@ export default new Vuex.Store({
   state,
   mutations,
   modules: {
-    index
+    goods,
+    cart
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []
