@@ -5,7 +5,7 @@ const state = {
 }
 
 const getters = {
-  cartGoodsList: state => state.goodsAdded
+  goodsAdded: state => state.goodsAdded
 }
 
 const mutations = {
