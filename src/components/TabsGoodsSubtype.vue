@@ -26,14 +26,12 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'tabsGoodsSubtype',
   data () {
     return {
-      goodsList: [],
-      goodsListPack: [],
       shopPetItemSwiperOption: {
         /* eslint-disable */
         scrollbar: {
@@ -44,12 +42,16 @@ export default {
       }
     }
   },
-  created () {
-    axios.get('static/mocks/goods-type.json').then((res) => {
-      this.goodsList = res.data.dogs[0].goodsList
-    })
+  computed: {
+    goodsList () {
+      // 购物车里的商品
+      return this.$store.state.goods.goodsList
+    }
   },
   methods: {
+    ...mapActions([
+      'sortGoods'
+    ]),
     $_compare (order, ...propertyName) {
       return (obj1, obj2) => {
         let val1 = obj1[propertyName[0]]
@@ -67,15 +69,7 @@ export default {
     },
     goodsSort (index, sort) {
       this.$refs.shopPetTypeSlideBar.style.left = `${index * 33.3333}%`
-      if (sort === 'default') {
-        this.goodsListPack = this.goodsList.sort(this.$_compare('asc', 'id'))
-      } else if (sort === 'prices') {
-        this.goodsListPack = this.goodsList.sort(this.$_compare('asc', 'price'))
-      } else if (sort === 'evaluate') {
-        this.goodsListPack = this.goodsList.sort(this.$_compare('asc', 'comments', 'score'))
-      } else {
-        this.goodsListPack = this.goodsList
-      }
+      this.sortGoods(sort)
     },
     topGoods () {
       this.$router.push('goods')

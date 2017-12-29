@@ -11,10 +11,10 @@
     <div class="ac-content">
       <swiper class="cart-swiper" :options="cartSwiperOption">
         <swiper-slide>
-          <div v-if="cartEmpty" class="ac-cart-empty">
+          <div v-if="!cartEmpty" class="ac-cart-empty">
             <div class="acc-bg"></div>
           </div>
-          <div v-if="cartEmpty" class="ac-recommend">
+          <div v-if="!cartEmpty" class="ac-recommend">
             <h3 class="ac-title"><span class="ac-text">去遛遛吧</span></h3>
             <div class="ac-goods-texts">
               <div class="ac-goods-texts-bg" @click.stop="toGoodsTexts">
@@ -97,8 +97,13 @@ export default {
     }
   },
   computed: {
+    cartGoods () {
+      // 购物车里的商品
+      return this.$store.state.cart.goodsAdded
+    },
     cartNotEmpty () {
-      return !this.cartEmpty
+      // 购物车不为空
+      return !!this.cartGoods.length
     },
     goodsNum () {
       return this.goodsCartList.length
@@ -112,13 +117,16 @@ export default {
   },
   created () {
     this.$_hideAppNav()
+    this.$_getAllGoods()
+    console.log(this.cartNotEmpty)
     axios.get('static/mocks/goods-cart.json').then((res) => {
       this.goodsCartList = res.data
     })
   },
   methods: {
     ...mapActions({
-      $_hideAppNav: 'hideAppNav'
+      $_hideAppNav: 'hideAppNav',
+      $_getAllGoods: 'getAllGoods'
     }),
     back () {
       this.$router.go(-1)

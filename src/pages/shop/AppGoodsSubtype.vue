@@ -23,10 +23,12 @@ export default {
   },
   created () {
     this.$_hideAppNav()
+    this.$_getAllGoods()
   },
   methods: {
     ...mapActions({
-      $_hideAppNav: 'hideAppNav'
+      $_hideAppNav: 'hideAppNav',
+      $_getAllGoods: 'getAllGoods'
     }),
     back () {
       this.$router.go(-1)

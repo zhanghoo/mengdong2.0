@@ -2,9 +2,9 @@
     "goodscart": [
         {
             "id": 0,
-            "seller": "来自喵星球某喵家",
+            "seller": "我才是来自汪星球的",
             "cover": "",
-            "title": "喵喵时尚小碎花护脖丝巾",
+            "title": "汪汪时尚小碎花护脖丝巾",
             "info": [
                 {
                     "desc": "颜色",
@@ -23,7 +23,9 @@
                 }
             ],
             "price": "80.00",
-            "inventory": 20
+            "inventory": 20,
+            "comments": "120",
+            "score": "4.5"
         },
         {
             "id": 1,
@@ -48,8 +50,10 @@
                     ]
                 }
             ],
-            "price": "260.00",
-            "inventory": 10
+            "price": "60.00",
+            "inventory": 10,
+            "comments": "130",
+            "score": "4.5"
         },
         {
             "id": 2,
@@ -75,8 +79,38 @@
                     ]
                 }
             ],
-            "price": "20.00",
-            "inventory": 20
+            "price": "120.00",
+            "inventory": 20,
+            "comments": "110",
+            "score": "4"
+        },
+        {
+            "id": 3,
+            "seller": "他们都不是我是",
+            "cover": "",
+            "title": "名媛气质毛衣",
+            "info": [
+                {
+                    "desc": "颜色",
+                    "choice": [
+                        "红色",
+                        "白色",
+                        "粉红"
+                    ]
+                },
+                {
+                    "desc": "尺寸",
+                    "size": [
+                        "M",
+                        "L",
+                        "XL"
+                    ]
+                }
+            ],
+            "price": "180.00",
+            "inventory": 60,
+            "comments": "90",
+            "score": "3"
         }
     ]
 }
