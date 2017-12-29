@@ -141,7 +141,7 @@ export default {
       this.selected.splice(selectedIndex, 1)
     },
     checked (goods) {
-      // console.log('app cart goods checked')
+      // console.log('app cart goods checked ')
       this.selected.push(goods)
     }
   }
