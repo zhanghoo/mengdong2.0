@@ -148,7 +148,7 @@ export default new Router({
       component: AppGoodsTexts
     },
     {
-      path: '/goods',
+      path: '/goods/:id',
       name: 'goods',
       meta: {
         title: '商品'

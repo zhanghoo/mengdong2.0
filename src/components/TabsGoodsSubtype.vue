@@ -11,9 +11,9 @@
           <swiper-slide class="agsu-slide">
             <ul class="agsu-goods-list clearfix">
               <li v-for="goods in goodsList" :key="goods.id" class="agsu-item">
-                <div class="agsu-goods-cover" @click.stop="topGoods"></div>
+                <div class="agsu-goods-cover" @click.stop="toGoods(goods.id)"></div>
                 <div class="agsu-goods-info">
-                  <p class="agsu-goods-title" @click.stop="topGoods">{{goods.title}}</p>
+                  <p class="agsu-goods-title" @click.stop="toGoods(goods.id)">{{goods.title}}</p>
                   <p class="agsu-goods-price">{{goods.price}}</p>
                 </div>
               </li>
@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     goodsList () {
-      // 购物车里的商品
+      // 所有的商品
       return this.$store.state.goods.goodsList
     }
   },
@@ -52,27 +52,13 @@ export default {
     ...mapActions([
       'sortGoods'
     ]),
-    $_compare (order, ...propertyName) {
-      return (obj1, obj2) => {
-        let val1 = obj1[propertyName[0]]
-        let val2 = obj2[propertyName[0]]
-        if (propertyName.length >= 2) {
-          val1 = propertyName.reduce((total, current) => {
-            return obj1[total] * obj1[current]
-          })
-          val2 = propertyName.reduce((total, current) => {
-            return obj2[total] * obj2[current]
-          })
-        }
-        return order === 'asc' ? (val1 - val2) : (val2 - val1)
-      }
-    },
     goodsSort (index, sort) {
       this.$refs.shopPetTypeSlideBar.style.left = `${index * 33.3333}%`
       this.sortGoods(sort)
     },
-    topGoods () {
-      this.$router.push('goods')
+    toGoods (goodsId) {
+      this.$router.push({ name: 'goods', params: { id: goodsId } })
+      // or router.push({ path: `/goods/${goodsId}` }) // -> /user/123
     }
   }
 }

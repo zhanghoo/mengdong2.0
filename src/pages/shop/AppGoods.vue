@@ -2,7 +2,7 @@
   <div class="app-goods">
     <app-header :is-transparent="true">
       <span slot="left" class="icon icon-back" @click="back">返回</span>
-      <span slot="title">个性印花纯棉小T</span>
+      <span slot="title">{{$_goods.title}}</span>
       <span slot="right" class="icon icon-back">分享</span>
     </app-header>
     <div class="ago-content">
@@ -21,17 +21,17 @@
             </div>
           </div>
           <div class="ago-choice">
-            <h2 class="agoc-title">加绒舒适卫衣</h2>
-            <p><span class="agoc-price">120.00</span></p>
+            <h2 class="agoc-title">{{$_goods.title}}</h2>
+            <p><span class="agoc-price">{{$_goods.price}}</span></p>
             <div class="ago-row">
               <div class="agor-title">颜色</div>
               <div class="agor-choice">
                 <ol class="agor-color-list">
-                  <li class="agor-color-item" @click="selectColor(0)">
-                    <span class="agor-circle" :class="{'on' : selectedColor === 0}"></span>
-                  </li>
-                  <li class="agor-color-item" @click="selectColor(1)">
-                    <span class="agor-circle" :class="{'on' : selectedColor === 1}"></span>
+                  <li v-for="(color,index) in $_goods.info.color" 
+                      :key="index" 
+                      class="agor-color-item" 
+                      @click="selectColor(index)">
+                    <span class="agor-circle" :class="{'on' : selectedColor === index}"></span>
                   </li>
                 </ol>
               </div>
@@ -40,17 +40,11 @@
               <div class="agor-title">尺码</div>
               <div class="agor-choice">
                 <ol class="agor-size-list">
-                  <li class="agor-size-item" @click="selectSize(0)">
-                    <span class="agor-rectangle" :class="{'on' : selectedSize === 0}">S</span>
-                  </li>
-                  <li class="agor-size-item" @click="selectSize(1)">
-                    <span class="agor-rectangle" :class="{'on' : selectedSize === 1}">M</span>
-                  </li>
-                  <li class="agor-size-item" @click="selectSize(2)">
-                    <span class="agor-rectangle" :class="{'on' : selectedSize === 2}">L</span>
-                  </li>
-                  <li class="agor-size-item" @click="selectSize(3)">
-                    <span class="agor-rectangle" :class="{'on' : selectedSize === 3}">XL</span>
+                  <li v-for="(size,index) in $_goods.info.size" 
+                      :key="index" 
+                      class="agor-size-item" 
+                      @click="selectSize(index)">
+                    <span class="agor-rectangle" :class="{'on' : selectedSize === index}">{{size}}</span>
                   </li>
                 </ol>
               </div>
@@ -128,12 +122,24 @@ export default {
       }
     }
   },
+  computed: {
+    $_goods () {
+      // 当前商品
+      return this.$store.state.goods.theGoods
+    }
+  },
   created () {
     this.$_hideAppNav()
+    this.$_getTheGoods(this.$route.params.id)
+    if (!this.$_goods) {
+      // 得到的商品为空, back
+      this.back()
+    }
   },
   methods: {
     ...mapActions({
-      $_hideAppNav: 'hideAppNav'
+      $_hideAppNav: 'hideAppNav',
+      $_getTheGoods: 'getTheGoods'
     }),
     back () {
       this.$router.go(-1)
