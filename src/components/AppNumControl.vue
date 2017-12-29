@@ -25,13 +25,13 @@ export default {
   },
   methods: {
     increase () {
-      // this.theGoodsNum++
       this.$emit('addToCart')
+      this.theGoodsNum++
     },
     decrease () {
-      // --this.theGoodsNum
-      // this.theGoodsNum = this.theGoodsNum > 0 ? this.theGoodsNum : 1
       this.$emit('cutFromCart')
+      --this.theGoodsNum
+      this.theGoodsNum = this.theGoodsNum > 0 ? this.theGoodsNum : 1
     }
   }
 }

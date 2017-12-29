@@ -4,7 +4,7 @@
       <span slot="left" class="icon icon-back" @click="back">返回</span>
       <span slot="title">购物车</span>
       <template slot="right">
-        <span v-if="delShow" class="icon icon-del">删除</span>
+        <span v-if="goodsSelectedNum > 0" class="icon icon-del">删除</span>
         <span v-else></span>
       </template>
     </app-header>
@@ -35,8 +35,8 @@
             </div>
           </div>
           <div v-if="cartNotEmpty" class="ac-cart-notempty">
-            <template v-for="goods in cartGoods">
-              <appPanelCartSlideMenu :goods="goods"/>
+            <template v-for="(goods,index) in cartGoods">
+              <appPanelCartSlideMenu :goods="goods" :goods-index="index" @unchecked="unchecked" @checked="checked"/>
             </template>
           </div>
           <div v-if="cartNotEmpty" class="ac-recommend">
@@ -56,7 +56,7 @@
     </div>
     <div class="ac-footer">
       <div class="ac-check-count">
-        <app-checkbox :select-all="true"/>
+        <app-checkbox :select-all="true" :check-all="checkAll"/>
         <span v-show="goodsSelectedNum > 0" class="ac-count-desc">不含运费</span>
         <span class="acc-text">总计：</span>
         <span class="acc-num">{{goodsCount}}</span>
@@ -82,7 +82,6 @@ export default {
   data () {
     return {
       selected: [],
-      delShow: false,
       cartSwiperOption: {
         /* eslint-disable */
         // scrollbar: {
@@ -95,18 +94,30 @@ export default {
   },
   computed: {
     ...mapGetters(['cartGoods']),
-    goodsLen () {
+    goodsCartNum () {
       return this.cartGoods.length
     },
     cartNotEmpty () {
       // 购物车不为空
-      return !!this.goodsLen
+      return !!this.goodsCartNum
     },
     goodsSelectedNum () {
       return this.selected.length
     },
+    checkAll () {
+      return this.goodsCartNum === this.goodsSelectedNum
+    },
     goodsCount () {
-      return '0.00'
+      if (this.goodsSelectedNum > 1) {
+        return this.selected.reduce((total, current) => {
+          total += current.price * current.quantity
+          return total
+        }, 0)
+      } else if (this.goodsSelectedNum === 1) {
+        return this.selected[0].price * this.selected[0].quantity
+      } else {
+        return '0.00'
+      }
     }
   },
   created () {
@@ -121,6 +132,17 @@ export default {
     },
     toGoodsTexts () {
       this.$router.push('goodstexts')
+    },
+    unchecked (index) {
+     // console.log('app cart goods unchecked')
+      const selectedIndex = this.selected.findIndex(g => {
+        return g.index === index
+      })
+      this.selected.splice(selectedIndex, 1)
+    },
+    checked (goods) {
+      // console.log('app cart goods checked')
+      this.selected.push(goods)
     }
   }
 }

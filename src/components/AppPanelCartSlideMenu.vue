@@ -4,7 +4,7 @@
       <swiper-slide class="content">
         <div class="acsm-goods-panel">
           <div class="acsm-check-box">
-            <app-checkbox />
+            <app-checkbox @unchecked="unchecked" @checked="checked"/>
           </div>
           <div class="acsm-cover"><div class="img"></div></div>
           <div class="acsm-goods" @click.stop="toGoods">
@@ -39,7 +39,11 @@ export default {
     AppNumControl
   },
   props: {
-    goods: Object
+    goods: Object,
+    goodsIndex: {
+      type: Number,
+      default: 0
+    }
   },
   data () {
     return {
@@ -54,12 +58,27 @@ export default {
     }
   },
   computed: {
+    goodsColor () {
+      return this.goods.info.color
+    },
+    goodsSize () {
+      return this.goods.info.size
+    },
+    theGoods () {
+      return {
+        'id': this.goods.id,
+        'info': {
+          'color': this.goodsColor,
+          'size': this.goodsSize
+        }
+      }
+    },
     addGoods () {
       return {
         'id': this.goods.id,
         'info': {
-          'color': this.goods.info.color,
-          'size': this.goods.info.size
+          'color': this.goodsColor,
+          'size': this.goodsSize
         },
         'quantity': 1
       }
@@ -68,8 +87,8 @@ export default {
       return {
         'id': this.goods.id,
         'info': {
-          'color': this.goods.info.color,
-          'size': this.goods.info.size
+          'color': this.goodsColor,
+          'size': this.goodsSize
         },
         'quantity': 1
       }
@@ -81,14 +100,24 @@ export default {
       $_cutFromCart: 'cutFromCart'
     }),
     toGoods () {
-      console.log(this.goods)
-      this.$router.push('goods')
+      this.$router.push({ name: 'goods', params: { id: this.goods.id } })
     },
     addToCart () {
       this.$_addToCart(this.addGoods)
     },
     cutFromCart () {
       this.$_cutFromCart(this.cutGoods)
+    },
+    unchecked () {
+      // console.log('good panel unchecked')
+      this.$emit('unchecked', this.goodsIndex)
+    },
+    checked () {
+      // console.log('good panel checked')
+      if (!this.goods.index) {
+        this.goods.index = this.goodsIndex
+      }
+      this.$emit('checked', this.goods)
     }
   }
 }

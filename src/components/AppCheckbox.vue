@@ -12,6 +12,10 @@ export default {
     selectAll: {
       type: Boolean,
       default: false
+    },
+    checkAll: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -22,6 +26,11 @@ export default {
   methods: {
     click () {
       this.theCheckFlag = !this.theCheckFlag
+      if (this.selectAll) {
+        console.log('click all')
+      } else {
+        this.theCheckFlag ? this.$emit('checked') : this.$emit('unchecked')
+      }
       return this.theCheckFlag
     }
   }
