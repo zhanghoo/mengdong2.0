@@ -36,7 +36,7 @@
           </div>
           <div v-if="cartNotEmpty" class="ac-cart-notempty">
             <template v-for="(goods,index) in cartGoods">
-              <appPanelCartSlideMenu :goods="goods" :goods-index="index" @unchecked="unchecked" @checked="checked" ref="appPanelCartSlideMenu"/>
+              <appPanelCartSlideMenu :goods="goods" :goods-index="index" @unchecked="unchecked" @checked="checked"/>
             </template>
           </div>
           <div v-if="cartNotEmpty" class="ac-recommend">
@@ -146,11 +146,9 @@ export default {
     },
     uncheckedAll () {
       this.selected = []
-      this.$refs.appPanelCartSlideMenu.uncheckedAll()
     },
     checkedAll () {
       this.selected = this.cartGoods
-      console.log(this.$refs.appPanelCartSlideMenu)
     }
   }
 }
