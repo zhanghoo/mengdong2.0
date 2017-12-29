@@ -9,14 +9,14 @@
           <div class="acsm-cover"><div class="img"></div></div>
           <div class="acsm-goods" @click.stop="toGoods">
             <h3 class="acsm-title">{{goods.title}}</h3>
-            <div class="acsm-info" v-for="(info,index) in goods.info" :key="index">
-              <p class="acsmi-desc">{{info.desc}}：</p>
-              <p class="acsmi-choice">{{info.choice}}</p>
+            <div class="acsm-info" v-for="(choice, desc,index) in goods.info" :key="index">
+              <p class="acsmi-desc">{{desc}}：</p>
+              <p class="acsmi-choice">{{choice}}</p>
             </div>
             <p class="acsm-price">{{goods.price}}</p>
           </div>
           <div class="acsm-num">
-            <app-num-control :goods-num="goods.number" />
+            <app-num-control :goods-num="goods.quantity" />
           </div>
         </div>
       </swiper-slide>
@@ -54,6 +54,7 @@ export default {
   },
   methods: {
     toGoods () {
+      console.log(this.goods)
       this.$router.push('goods')
     }
   }

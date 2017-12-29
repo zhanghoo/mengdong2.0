@@ -15,6 +15,7 @@
 import { mapActions } from 'vuex'
 import AppHeader from '@/components/AppHeader'
 import TabsGoodsSubtype from '@/components/TabsGoodsSubtype'
+
 export default {
   name: 'appGoodsSubtype',
   components: {

@@ -80,7 +80,7 @@
         <span class="icon icon-msg">店铺</span>
       </div>
       <div class="ago-btns">
-        <a href="javascript:;" class="ago-btn-add">加入购物车</a>
+        <a href="javascript:;" class="ago-btn-add" @click.stop="clickAddToCart">加入购物车</a>
         <a href="javascript:;" class="ago-btn-buy">购买</a>
       </div>
     </div>
@@ -137,6 +137,22 @@ export default {
     $_goods () {
       // 当前商品
       return this.$store.state.goods.theGoods
+    },
+    selectedGoodsColor () {
+      return this.$_goods.info.color[this.selectedColor]
+    },
+    selectedGoodsSize () {
+      return this.$_goods.info.size[this.selectedSize]
+    },
+    addGoods () {
+      return {
+        'id': this.$_goods.id,
+        'info': {
+          '颜色': this.selectedGoodsColor,
+          '尺寸': this.selectedGoodsSize
+        },
+        'quantity': this.selectedNum
+      }
     }
   },
   created () {
@@ -150,7 +166,8 @@ export default {
   methods: {
     ...mapActions({
       $_hideAppNav: 'hideAppNav',
-      $_getTheGoods: 'getTheGoods'
+      $_getTheGoods: 'getTheGoods',
+      $_addToCart: 'addToCart'
     }),
     back () {
       this.$router.go(-1)
@@ -169,6 +186,9 @@ export default {
       if (this.selectedNum <= 0) {
         this.selectedNum = 1
       }
+    },
+    clickAddToCart () {
+      this.$_addToCart(this.addGoods)
     }
   }
 }

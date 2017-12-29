@@ -11,10 +11,10 @@
     <div class="ac-content">
       <swiper class="cart-swiper" :options="cartSwiperOption">
         <swiper-slide>
-          <div v-if="!cartEmpty" class="ac-cart-empty">
+          <div v-if="!cartNotEmpty" class="ac-cart-empty">
             <div class="acc-bg"></div>
           </div>
-          <div v-if="!cartEmpty" class="ac-recommend">
+          <div v-if="!cartNotEmpty" class="ac-recommend">
             <h3 class="ac-title"><span class="ac-text">去遛遛吧</span></h3>
             <div class="ac-goods-texts">
               <div class="ac-goods-texts-bg" @click.stop="toGoodsTexts">
@@ -35,7 +35,7 @@
             </div>
           </div>
           <div v-if="cartNotEmpty" class="ac-cart-notempty">
-            <template v-for="goods in goodsCartList.goodscart">
+            <template v-for="goods in cartGoods">
               <appPanelCartSlideMenu :goods="goods"/>
             </template>
           </div>
@@ -67,10 +67,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import AppHeader from '@/components/AppHeader'
 import AppPanelCartSlideMenu from '@/components/AppPanelCartSlideMenu'
-import axios from 'axios'
 import AppCheckbox from '@/components/AppCheckbox'
 
 export default {
@@ -82,10 +81,8 @@ export default {
   },
   data () {
     return {
-      cartEmpty: false,
       selected: [],
       delShow: false,
-      goodsCartList: {},
       cartSwiperOption: {
         /* eslint-disable */
         // scrollbar: {
@@ -97,16 +94,13 @@ export default {
     }
   },
   computed: {
-    cartGoods () {
-      // 购物车里的商品
-      return this.$store.state.cart.goodsAdded
+    ...mapGetters(['cartGoods']),
+    goodsLen () {
+      return this.cartGoods.length
     },
     cartNotEmpty () {
       // 购物车不为空
-      return !!this.cartGoods.length
-    },
-    goodsNum () {
-      return this.goodsCartList.length
+      return !!this.goodsLen
     },
     goodsSelectedNum () {
       return this.selected.length
@@ -117,16 +111,10 @@ export default {
   },
   created () {
     this.$_hideAppNav()
-    this.$_getAllGoods()
-    console.log(this.cartNotEmpty)
-    axios.get('static/mocks/goods-cart.json').then((res) => {
-      this.goodsCartList = res.data
-    })
   },
   methods: {
     ...mapActions({
-      $_hideAppNav: 'hideAppNav',
-      $_getAllGoods: 'getAllGoods'
+      $_hideAppNav: 'hideAppNav'
     }),
     back () {
       this.$router.go(-1)

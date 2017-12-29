@@ -8,6 +8,7 @@ export const state = {
 }
 
 export const getters = {
+  allGoods: state => state.goodsList
 }
 
 export const mutations = {
