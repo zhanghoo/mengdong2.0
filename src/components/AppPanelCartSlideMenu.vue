@@ -9,14 +9,14 @@
           <div class="acsm-cover"><div class="img"></div></div>
           <div class="acsm-goods" @click.stop="toGoods">
             <h3 class="acsm-title">{{goods.title}}</h3>
-            <div class="acsm-info" v-for="(choice, desc,index) in goods.info" :key="index">
+            <div class="acsm-info" v-for="(choice, desc, index) in goods.info" :key="index">
               <p class="acsmi-desc">{{desc}}：</p>
               <p class="acsmi-choice">{{choice}}</p>
             </div>
             <p class="acsm-price">{{goods.price}}</p>
           </div>
           <div class="acsm-num">
-            <app-num-control :goods-num="goods.quantity" />
+            <app-num-control :goods-num="goods.quantity" @addToCart="addToCart" @cutFromCart="cutFromCart"/>
           </div>
         </div>
       </swiper-slide>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import AppCheckbox from '@/components/AppCheckbox'
 import AppNumControl from '@/components/AppNumControl'
 
@@ -52,10 +53,42 @@ export default {
       }
     }
   },
+  computed: {
+    addGoods () {
+      return {
+        'id': this.goods.id,
+        'info': {
+          'color': this.goods.info.color,
+          'size': this.goods.info.size
+        },
+        'quantity': 1
+      }
+    },
+    cutGoods () {
+      return {
+        'id': this.goods.id,
+        'info': {
+          'color': this.goods.info.color,
+          'size': this.goods.info.size
+        },
+        'quantity': 1
+      }
+    }
+  },
   methods: {
+    ...mapActions({
+      $_addToCart: 'addToCart',
+      $_cutFromCart: 'cutFromCart'
+    }),
     toGoods () {
       console.log(this.goods)
       this.$router.push('goods')
+    },
+    addToCart () {
+      this.$_addToCart(this.addGoods)
+    },
+    cutFromCart () {
+      this.$_cutFromCart(this.cutGoods)
     }
   }
 }

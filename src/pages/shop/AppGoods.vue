@@ -148,8 +148,8 @@ export default {
       return {
         'id': this.$_goods.id,
         'info': {
-          '颜色': this.selectedGoodsColor,
-          '尺寸': this.selectedGoodsSize
+          'color': this.selectedGoodsColor,
+          'size': this.selectedGoodsSize
         },
         'quantity': this.selectedNum
       }

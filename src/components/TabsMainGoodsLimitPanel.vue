@@ -3,13 +3,13 @@
     <div class="shop-limit-info" :class="[isLeft]">
       <div>
         <span class="limit-theme">限时特惠</span>
-        <p class="limit-title" @click.stop="topGoods">{{limit.title}}</p>
+        <p class="limit-title" @click.stop="toGoods">{{limit.title}}</p>
         <p class="limit-date">剩余1小时20分钟30秒</p>
         <p class="limit-new-price">{{limit.newPrice}}</p>
         <p class="limit-old-price">{{limit.oldPrice}}</p>
       </div>
     </div>
-    <div class="shop-limit-img" :class="[isRight]" @click.stop="topGoods"></div>
+    <div class="shop-limit-img" :class="[isRight]" @click.stop="toGoods"></div>
   </div>
 </template>
 
@@ -32,7 +32,7 @@ export default {
     }
   },
   methods: {
-    topGoods () {
+    toGoods () {
       this.$router.push('goods')
     }
   }

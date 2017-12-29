@@ -2,7 +2,7 @@
   <div class="num-control">
     <span class="nc-btn-decrease" @click="decrease">-</span>
     <div class="nc-input-box">
-      <span class="nc-input-num">{{theGoodsNum}}</span>
+      <span class="nc-input-num">{{goodsNum}}</span>
       <input v-model="theGoodsNum" class="nc-input-input" type="number"/>
     </div>
     <span class="nc-btn-increase" @click="increase">+</span>
@@ -25,11 +25,13 @@ export default {
   },
   methods: {
     increase () {
-      this.theGoodsNum++
+      // this.theGoodsNum++
+      this.$emit('addToCart')
     },
     decrease () {
-      --this.theGoodsNum
-      this.theGoodsNum = this.theGoodsNum > 0 ? this.theGoodsNum : 1
+      // --this.theGoodsNum
+      // this.theGoodsNum = this.theGoodsNum > 0 ? this.theGoodsNum : 1
+      this.$emit('cutFromCart')
     }
   }
 }

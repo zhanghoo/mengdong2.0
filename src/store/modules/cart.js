@@ -53,16 +53,47 @@ const mutations = {
       // 有则数量加 quantity
       goods.quantity = goods.quantity + quantity
     }
+  },
+  // 从购物车中加少商品
+  [types.CUT_FROM_CART] (state, { id, info, quantity }) {
+    const _info = JSON.parse(JSON.stringify(info))
+    const goods = state.goodsAdded.find(g => {
+      const _gInfo = JSON.parse(JSON.stringify(g.info))
+      return g.id === id && hIsEqual(_gInfo, _info)
+    })
+    if (goods) {
+      // 有则减少
+      if (quantity <= goods.quantity) {
+        // 需要减少的数小于添加了的商品数
+        goods.quantity = goods.quantity - quantity
+      } else {
+        goods.quantity = 0
+      }
+      if (goods.quantity === 0) {
+        // 商品数减少到0, 移除
+        const goodsIndex = state.goodsAdded.findIndex(g => {
+          const _gInfo = JSON.parse(JSON.stringify(g.info))
+          return g.id === id && hIsEqual(_gInfo, _info)
+        })
+        state.goodsAdded.splice(goodsIndex, 1)
+      }
+    }
   }
 }
 
 const actions = {
   // 商品页，添加到购物车，保存商品的id和选择的info
-  addToCart ({ commit, state }, goods) {
+  addToCart ({ commit }, goods) {
     const info = goods.info
     const id = goods.id
     const quantity = goods.quantity
     commit(types.ADD_TO_CART, { id, info, quantity })
+  },
+  cutFromCart ({ commit }, goods) {
+    const info = goods.info
+    const id = goods.id
+    const quantity = goods.quantity
+    commit(types.CUT_FROM_CART, { id, info, quantity })
   }
 }
 

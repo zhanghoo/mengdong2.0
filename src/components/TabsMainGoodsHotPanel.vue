@@ -12,8 +12,8 @@
     <div class="shop-hot-goods">
       <swiper :options="swiperHotOption" class="hot-goods-swiper">
         <swiper-slide v-for="good in hot.goods" :key="good.id" class="hot-goods-slide">
-          <div class="goods-bg" @click.stop="topGoods"></div>
-          <p class="goods-title" @click.stop="topGoods">{{good.title}}</p>
+          <div class="goods-bg" @click.stop="toGoods"></div>
+          <p class="goods-title" @click.stop="toGoods">{{good.title}}</p>
           <p class="goods-price">{{good.price}}</p>
         </swiper-slide>
       </swiper>
@@ -40,7 +40,7 @@ export default {
     toGoodsTexts () {
       this.$router.push('goodstexts')
     },
-    topGoods () {
+    toGoods () {
       this.$router.push('goods')
     }
   }
