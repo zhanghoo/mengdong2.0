@@ -36,7 +36,7 @@
           </div>
           <div v-if="cartNotEmpty" class="ac-cart-notempty">
             <template v-for="(goods,index) in cartGoods">
-              <appPanelCartSlideMenu :goods="goods" :goods-index="index" @unchecked="unchecked" @checked="checked"/>
+              <appPanelCartSlideMenu :goods="goods" :goods-index="index" @unchecked="unchecked" @checked="checked" ref="appPanelCartSlideMenu"/>
             </template>
           </div>
           <div v-if="cartNotEmpty" class="ac-recommend">
@@ -56,7 +56,7 @@
     </div>
     <div class="ac-footer">
       <div class="ac-check-count">
-        <app-checkbox :select-all="true" :check-all="checkAll"/>
+        <app-checkbox :select-all="true" :check-all="checkAll" @checkedAll="checkedAll" @uncheckedAll="uncheckedAll"/>
         <span v-show="goodsSelectedNum > 0" class="ac-count-desc">不含运费</span>
         <span class="acc-text">总计：</span>
         <span class="acc-num">{{goodsCount}}</span>
@@ -143,6 +143,14 @@ export default {
     checked (goods) {
       // console.log('app cart goods checked ')
       this.selected.push(goods)
+    },
+    uncheckedAll () {
+      this.selected = []
+      this.$refs.appPanelCartSlideMenu.uncheckedAll()
+    },
+    checkedAll () {
+      this.selected = this.cartGoods
+      console.log(this.$refs.appPanelCartSlideMenu)
     }
   }
 }

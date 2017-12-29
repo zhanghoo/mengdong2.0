@@ -118,6 +118,12 @@ export default {
         this.goods.index = this.goodsIndex
       }
       this.$emit('checked', this.goods)
+    },
+    uncheckedAll () {
+      console.log('uncheckedAll')
+    },
+    checkedAll () {
+      console.log('checkedAll')
     }
   }
 }

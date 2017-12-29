@@ -23,11 +23,16 @@ export default {
       theCheckFlag: false
     }
   },
+  computed: {
+    $_checkAll () {
+      return this.checkAll
+    }
+  },
   methods: {
     click () {
       this.theCheckFlag = !this.theCheckFlag
       if (this.selectAll) {
-        console.log('click all')
+        this.theCheckFlag ? this.$emit('checkedAll') : this.$emit('uncheckedAll')
       } else {
         this.theCheckFlag ? this.$emit('checked') : this.$emit('unchecked')
       }
