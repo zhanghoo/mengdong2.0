@@ -1,6 +1,6 @@
 <template>
   <div class="app-goods">
-    <app-header :is-transparent="true">
+    <app-header :is-transparent="isTransparent">
       <span slot="left" class="icon icon-back" @click="back">返回</span>
       <span slot="title">{{$_goods.title}}</span>
       <span slot="right" class="icon icon-back">分享</span>
@@ -96,16 +96,27 @@ export default {
     AppHeader
   },
   data () {
+    const self = this
     return {
       selectedColor: 0,
       selectedSize: 1,
       selectedNum: 1,
+      isTransparent: true,
       goodsSwiperOption: {
         /* eslint-disable */
         // scrollbar: {
         //   el: '.swiper-home-scrollbar',
         //   hide: true
         // }
+        on: {
+          touchMove: function() {
+            if (this.translate <= -48 && self.isTransparent) {
+              self.isTransparent = false
+            } else if (this.translate > -48 && !self.isTransparent) {
+              self.isTransparent = true
+            }
+          }
+        }
         /* eslint-enable */
       },
       imageSwiperOption: {
