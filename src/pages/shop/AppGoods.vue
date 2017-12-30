@@ -84,16 +84,20 @@
         <a href="javascript:;" class="ago-btn-buy">购买</a>
       </div>
     </div>
+    <app-layer-msg :msg="msg" ref="appLayerMsg" />
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import AppHeader from '@/components/AppHeader'
+import AppLayerMsg from '@/components/AppLayerMsg'
+
 export default {
   name: 'appGoods',
   components: {
-    AppHeader
+    AppHeader,
+    AppLayerMsg
   },
   data () {
     const self = this
@@ -102,6 +106,7 @@ export default {
       selectedSize: 1,
       selectedNum: 1,
       isTransparent: true,
+      appLayerMsg: '',
       goodsSwiperOption: {
         /* eslint-disable */
         // scrollbar: {
@@ -153,6 +158,9 @@ export default {
         },
         'quantity': this.selectedNum
       }
+    },
+    msg () {
+      return this.appLayerMsg
     }
   },
   created () {
@@ -189,6 +197,8 @@ export default {
     },
     clickAddToCart () {
       this.$_addToCart(this.addGoods)
+      this.appLayerMsg = '添加成功，在购物车等亲~'
+      this.$refs.appLayerMsg.show()
     }
   }
 }

@@ -1,0 +1,94 @@
+{
+    "goodscart": [
+        {
+            "id": 0,
+            "seller": "我才是来自汪星球的",
+            "cover": "",
+            "title": "汪汪时尚小碎花护脖丝巾",
+            "info": {
+                "color": [
+                    "蓝色碎花",
+                    "粉色碎花"
+                ],
+                "size": [
+                    "S",
+                    "M",
+                    "L",
+                    "XL"
+                ]
+            },
+            "price": "80.00",
+            "inventory": 20,
+            "comments": "120",
+            "score": "4.5"
+        },
+        {
+            "id": 1,
+            "seller": "来自汪星球某汪家",
+            "cover": "",
+            "title": "宠物专用美容养护套盒",
+            "info": {
+                "color": [
+                    "白色套盒",
+                    "蓝色套盒",
+                    "粉色套盒"
+                ],
+                "size": [
+                    "M",
+                    "L",
+                    "XL"
+                ]
+            },
+            "price": "60.00",
+            "inventory": 10,
+            "comments": "130",
+            "score": "4.5"
+        },
+        {
+            "id": 2,
+            "seller": "来自汪星球某汪家",
+            "cover": "",
+            "title": "卖萌专用软边圆弧镜框",
+            "info": {
+                "color": [
+                    "黑色",
+                    "白色",
+                    "草绿",
+                    "粉红"
+                ],
+                "size": [
+                    "M",
+                    "L",
+                    "XL"
+                ]
+            },
+            "price": "120.00",
+            "inventory": 20,
+            "comments": "110",
+            "score": "4"
+        },
+        {
+            "id": 3,
+            "seller": "他们都不是我是",
+            "cover": "",
+            "title": "名媛气质毛衣",
+            "info": {
+                "color": [
+                    "红色",
+                    "白色",
+                    "粉红"
+                ],
+                "size": [
+                    "M",
+                    "L",
+                    "XL",
+                    "XXL"
+                ]
+            },
+            "price": "180.00",
+            "inventory": 60,
+            "comments": "90",
+            "score": "3"
+        }
+    ]
+}

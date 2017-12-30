@@ -64,8 +64,9 @@
         <span class="acc-text">总计：</span>
         <span class="acc-num">{{goodsCount}}</span>
       </div>
-      <div class="ac-account" :class="goodsSelectedNum > 0 ? 'on' : ''">去结算</div>
+      <div class="ac-account" :class="goodsSelectedNum > 0 ? 'on' : ''" @click="settlement">去结算</div>
     </div>
+    <app-layer-msg :msg="msg" ref="appLayerMsg" />
   </div>
 </template>
 
@@ -74,17 +75,20 @@ import { mapActions, mapGetters } from 'vuex'
 import AppHeader from '@/components/AppHeader'
 import AppPanelCartSlideMenu from '@/components/AppPanelCartSlideMenu'
 import AppCheckbox from '@/components/AppCheckbox'
+import AppLayerMsg from '@/components/AppLayerMsg'
 
 export default {
   name: 'appCart',
   components: {
     AppHeader,
     AppPanelCartSlideMenu,
-    AppCheckbox
+    AppCheckbox,
+    AppLayerMsg
   },
   data () {
     return {
       selected: [],
+      appLayerMsg: '',
       cartSwiperOption: {
         /* eslint-disable */
         // scrollbar: {
@@ -121,6 +125,9 @@ export default {
       } else {
         return '0.00'
       }
+    },
+    msg () {
+      return this.appLayerMsg
     }
   },
   created () {
@@ -146,15 +153,19 @@ export default {
     },
     uncheckedAll () {
       this.$_uncheckAllGoods()
-      this.$refs.appPanelCartSlideMenu.forEach((el) => {
-        el.uncheckedAll()
-      })
+      if (this.cartNotEmpty) {
+        this.$refs.appPanelCartSlideMenu.forEach((el) => {
+          el.uncheckedAll()
+        })
+      }
     },
     checkedAll () {
       this.$_checkAllGoods()
-      this.$refs.appPanelCartSlideMenu.forEach((el) => {
-        el.checkedAll()
-      })
+      if (this.cartNotEmpty) {
+        this.$refs.appPanelCartSlideMenu.forEach((el) => {
+          el.checkedAll()
+        })
+      }
     },
     uncheckedAllCheckbox () {
       this.$refs.allCheckbox.unchecked()
@@ -166,6 +177,14 @@ export default {
       this.checkedGoods.forEach((goods) => {
         this.$_cutFromCart(goods)
       })
+    },
+    settlement () {
+      if (this.goodsSelectedNum > 0) {
+        console.log('to app order')
+      } else {
+        this.appLayerMsg = '您还没有选择宝贝哦！'
+        this.$refs.appLayerMsg.show()
+      }
     }
   }
 }
