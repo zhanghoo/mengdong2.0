@@ -123,15 +123,12 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
+    opacity: 0;
+    &.show {
+      opacity: 1;
+    }
     &.show:before,&.show:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(#ab84e0, #9e6fdd);
+      
     }
     &.show:after {
       left: auto;
@@ -139,6 +136,22 @@ export default {
       background: linear-gradient(#deb87c, #dbae65);
     }
     .guide-page {
+      &.page1:before,
+      &.page4:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: -200%;
+        width: 200%;
+        height: 100%;
+        background: linear-gradient(#ab84e0, #9e6fdd);
+      }
+      &.page4:after {
+        left: auto;
+        right: -200%;
+        background: linear-gradient(#deb87c, #dbae65);
+      }
       .img {
         width: 100%;
         height: 100%;
