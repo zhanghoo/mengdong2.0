@@ -90,7 +90,7 @@ export default {
           float: right;
           padding: 13px;
           margin-right: 15px;
-          width: 60%;
+          max-width: 60%;
           background: $mainColor;
           border-radius: 20px;
           line-height: 15px;
