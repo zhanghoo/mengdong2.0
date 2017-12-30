@@ -12,7 +12,7 @@
       <swiper class="cart-swiper" :options="cartSwiperOption">
         <swiper-slide>
           <div v-if="!cartNotEmpty" class="ac-cart-empty">
-            <div class="acc-bg"></div>
+            <div class="acc-bg"><img class="acc-img" src="static/images/cart-empty.jpg"></div>
           </div>
           <div v-if="!cartNotEmpty" class="ac-recommend">
             <h3 class="ac-title"><span class="ac-text">去遛遛吧</span></h3>
@@ -215,8 +215,13 @@ export default {
           left: 0;
           width: 100%;
           height: 100%;
-          background: url(../../../static/images/cart-empty.png) no-repeat center;
-          background-size: 60%;
+          .acc-img {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            height: 60%;
+          }
         }
       }
       .ac-recommend {
