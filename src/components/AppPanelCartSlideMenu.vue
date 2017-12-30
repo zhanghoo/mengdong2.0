@@ -4,13 +4,13 @@
       <swiper-slide class="content">
         <div class="acsm-goods-panel">
           <div class="acsm-check-box">
-            <app-checkbox @unchecked="unchecked" @checked="checked"/>
+            <app-checkbox @unchecked="unchecked" @checked="checked" ref="appCheckbox"/>
           </div>
           <div class="acsm-cover"><div class="img"></div></div>
           <div class="acsm-goods" @click.stop="toGoods">
             <h3 class="acsm-title">{{goods.title}}</h3>
             <div class="acsm-info" v-for="(choice, desc, index) in goods.info" :key="index">
-              <p class="acsmi-desc">{{desc}}：</p>
+              <p class="acsmi-desc">{{desc | translateDesc}}：</p>
               <p class="acsmi-choice">{{choice}}</p>
             </div>
             <p class="acsm-price">{{goods.price}}</p>
@@ -21,14 +21,14 @@
         </div>
       </swiper-slide>
       <swiper-slide class="menu">
-        <span class="icon icon-del">删除</span>
+        <span class="icon icon-del" @click="cutThisAllFromCart">删除</span>
       </swiper-slide>
     </swiper>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import AppCheckbox from '@/components/AppCheckbox'
 import AppNumControl from '@/components/AppNumControl'
 
@@ -38,12 +38,20 @@ export default {
     AppCheckbox,
     AppNumControl
   },
-  props: {
-    goods: Object,
-    goodsIndex: {
-      type: Number,
-      default: 0
+  filters: {
+    translateDesc (desc) {
+      switch (desc) {
+        case 'size':
+          return '尺寸'
+        case 'color':
+          return '颜色'
+        default:
+          return '无对应描述'
+      }
     }
+  },
+  props: {
+    goods: Object
   },
   data () {
     return {
@@ -58,6 +66,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['checkedAllStatus']),
     goodsColor () {
       return this.goods.info.color
     },
@@ -74,30 +83,24 @@ export default {
       }
     },
     addGoods () {
-      return {
-        'id': this.goods.id,
-        'info': {
-          'color': this.goodsColor,
-          'size': this.goodsSize
-        },
-        'quantity': 1
-      }
+      const addGoods = Object.assign(this.theGoods, {'quantity': 1})
+      return addGoods
     },
     cutGoods () {
-      return {
-        'id': this.goods.id,
-        'info': {
-          'color': this.goodsColor,
-          'size': this.goodsSize
-        },
-        'quantity': 1
-      }
+      const cutGoods = Object.assign(this.theGoods, {'quantity': 1})
+      return cutGoods
+    },
+    cutGoodsAll () {
+      const cutGoodsAll = Object.assign(this.theGoods, {'quantity': this.quantity})
+      return cutGoodsAll
     }
   },
   methods: {
     ...mapActions({
       $_addToCart: 'addToCart',
-      $_cutFromCart: 'cutFromCart'
+      $_cutFromCart: 'cutFromCart',
+      $_checkGoods: 'checkGoods',
+      $_uncheckGoods: 'uncheckGoods'
     }),
     toGoods () {
       this.$router.push({ name: 'goods', params: { id: this.goods.id } })
@@ -108,22 +111,30 @@ export default {
     cutFromCart () {
       this.$_cutFromCart(this.cutGoods)
     },
+    cutThisAllFromCart () {
+      this.$_cutFromCart(this.cutGoodsAll)
+    },
     unchecked () {
       // console.log('good panel unchecked')
-      this.$emit('unchecked', this.goodsIndex)
+      this.$_uncheckGoods(this.theGoods)
+      if (!this.checkedAllStatus) {
+        // 取消全选了,触发全选按钮
+        this.$emit('uncheckedAllCheckbox')
+      }
     },
     checked () {
       // console.log('good panel checked')
-      if (!this.goods.index) {
-        this.goods.index = this.goodsIndex
+      this.$_checkGoods(this.theGoods)
+      if (this.checkedAllStatus) {
+        // 全选了,触发全选按钮
+        this.$emit('checkedAllCheckbox')
       }
-      this.$emit('checked', this.goods)
     },
     uncheckedAll () {
-      console.log('uncheckedAll')
+      this.$refs.appCheckbox.unchecked()
     },
     checkedAll () {
-      console.log('checkedAll')
+      this.$refs.appCheckbox.checked()
     }
   }
 }

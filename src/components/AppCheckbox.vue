@@ -32,11 +32,17 @@ export default {
     click () {
       this.theCheckFlag = !this.theCheckFlag
       if (this.selectAll) {
-        console.log('click all')
+        this.theCheckFlag ? this.$emit('checkedAll') : this.$emit('uncheckedAll')
       } else {
         this.theCheckFlag ? this.$emit('checked') : this.$emit('unchecked')
       }
       return this.theCheckFlag
+    },
+    unchecked () {
+      this.theCheckFlag = false
+    },
+    checked () {
+      this.theCheckFlag = true
     }
   }
 }

@@ -4,7 +4,7 @@
       <span slot="left" class="icon icon-back" @click="back">返回</span>
       <span slot="title">购物车</span>
       <template slot="right">
-        <span v-if="goodsSelectedNum > 0" class="icon icon-del">删除</span>
+        <span v-if="goodsSelectedNum > 0" class="icon icon-del" @click="cutCheckedFromCart">删除</span>
         <span v-else></span>
       </template>
     </app-header>
@@ -27,26 +27,29 @@
             </div>
             <div class="ac-goods">
               <ul class="ac-goods-list">
-                <li class="ac-goods-item"><div class="acg-bg"></div></li>
-                <li class="ac-goods-item"><div class="acg-bg"></div></li>
-                <li class="ac-goods-item"><div class="acg-bg"></div></li>
-                <li class="ac-goods-item"><div class="acg-bg"></div></li>
+                <li class="ac-goods-item"><div class="acg-bg"><div class="img"></div></div></li>
+                <li class="ac-goods-item"><div class="acg-bg"><div class="img"></div></div></li>
+                <li class="ac-goods-item"><div class="acg-bg"><div class="img"></div></div></li>
+                <li class="ac-goods-item"><div class="acg-bg"><div class="img"></div></div></li>
               </ul>
             </div>
           </div>
           <div v-if="cartNotEmpty" class="ac-cart-notempty">
-            <template v-for="(goods,index) in cartGoods">
-              <appPanelCartSlideMenu :goods="goods" :goods-index="index" @unchecked="unchecked" @checked="checked"/>
-            </template>
+              <appPanelCartSlideMenu v-for="goods in cartGoods"
+                                     :goods="goods"
+                                     ref="appPanelCartSlideMenu" 
+                                     :key="goods.index" 
+                                     @uncheckedAllCheckbox="uncheckedAllCheckbox" 
+                                     @checkedAllCheckbox="checkedAllCheckbox" />
           </div>
-          <div v-if="cartNotEmpty" class="ac-recommend">
+          <div v-if="cartNotEmpty" class="ac-recommend ac-like">
             <h3 class="ac-title"><span class="ac-text">猜你喜欢</span></h3>
             <div class="ac-goods">
               <ul class="ac-goods-list">
-                <li class="ac-goods-item"><div class="acg-bg"></div></li>
-                <li class="ac-goods-item"><div class="acg-bg"></div></li>
-                <li class="ac-goods-item"><div class="acg-bg"></div></li>
-                <li class="ac-goods-item"><div class="acg-bg"></div></li>
+                <li class="ac-goods-item"><div class="acg-bg"><div class="img"></div></div></li>
+                <li class="ac-goods-item"><div class="acg-bg"><div class="img"></div></div></li>
+                <li class="ac-goods-item"><div class="acg-bg"><div class="img"></div></div></li>
+                <li class="ac-goods-item"><div class="acg-bg"><div class="img"></div></div></li>
               </ul>
             </div>
           </div>
@@ -56,7 +59,7 @@
     </div>
     <div class="ac-footer">
       <div class="ac-check-count">
-        <app-checkbox :select-all="true" :check-all="checkAll" @checkedAll="checkedAll" @uncheckedAll="uncheckedAll"/>
+        <app-checkbox :select-all="true" ref="allCheckbox" @checkedAll="checkedAll" @uncheckedAll="uncheckedAll"/>
         <span v-show="goodsSelectedNum > 0" class="ac-count-desc">不含运费</span>
         <span class="acc-text">总计：</span>
         <span class="acc-num">{{goodsCount}}</span>
@@ -93,7 +96,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['cartGoods']),
+    ...mapGetters(['cartGoods', 'checkedGoods', 'checkedAllStatus']),
     goodsCartNum () {
       return this.cartGoods.length
     },
@@ -102,19 +105,19 @@ export default {
       return !!this.goodsCartNum
     },
     goodsSelectedNum () {
-      return this.selected.length
+      return this.checkedGoods.length
     },
     checkAll () {
       return this.goodsCartNum === this.goodsSelectedNum
     },
     goodsCount () {
       if (this.goodsSelectedNum > 1) {
-        return this.selected.reduce((total, current) => {
+        return this.checkedGoods.reduce((total, current) => {
           total += current.price * current.quantity
           return total
         }, 0)
       } else if (this.goodsSelectedNum === 1) {
-        return this.selected[0].price * this.selected[0].quantity
+        return this.checkedGoods[0].price * this.checkedGoods[0].quantity
       } else {
         return '0.00'
       }
@@ -123,9 +126,17 @@ export default {
   created () {
     this.$_hideAppNav()
   },
+  destroyed () {
+    // 退出购物车的时候将所有勾选的状态清空, 因为退出的时候有些可能还是勾选的
+    // 即全不选
+    this.uncheckedAll()
+  },
   methods: {
     ...mapActions({
-      $_hideAppNav: 'hideAppNav'
+      $_hideAppNav: 'hideAppNav',
+      $_checkAllGoods: 'checkAllGoods',
+      $_uncheckAllGoods: 'uncheckAllGoods',
+      $_cutFromCart: 'cutFromCart'
     }),
     back () {
       this.$router.go(-1)
@@ -133,22 +144,28 @@ export default {
     toGoodsTexts () {
       this.$router.push('goodstexts')
     },
-    unchecked (index) {
-     // console.log('app cart goods unchecked')
-      const selectedIndex = this.selected.findIndex(g => {
-        return g.index === index
-      })
-      this.selected.splice(selectedIndex, 1)
-    },
-    checked (goods) {
-      // console.log('app cart goods checked ')
-      this.selected.push(goods)
-    },
     uncheckedAll () {
-      this.selected = []
+      this.$_uncheckAllGoods()
+      this.$refs.appPanelCartSlideMenu.forEach((el) => {
+        el.uncheckedAll()
+      })
     },
     checkedAll () {
-      this.selected = this.cartGoods
+      this.$_checkAllGoods()
+      this.$refs.appPanelCartSlideMenu.forEach((el) => {
+        el.checkedAll()
+      })
+    },
+    uncheckedAllCheckbox () {
+      this.$refs.allCheckbox.unchecked()
+    },
+    checkedAllCheckbox () {
+      this.$refs.allCheckbox.checked()
+    },
+    cutCheckedFromCart () {
+      this.checkedGoods.forEach((goods) => {
+        this.$_cutFromCart(goods)
+      })
     }
   }
 }
@@ -264,25 +281,53 @@ export default {
               position: relative;
               float: left;
               padding-top: 50%;
-              margin-bottom: 10px;
               width: 50%;
               height: 0;
+              border-bottom: 5px solid transparent;
               .acg-bg {
                 position: absolute;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: #ccc;
               }
               &:nth-child(2n) {
                 .acg-bg {
-                  margin-left: 10px;
+                  border-left: 5px solid transparent;
+                  border-bottom: 5px solid transparent;
                 }
               }
               &:nth-child(2n+1) {
                 .acg-bg {
-                  margin-right: 10px;
+                  border-right: 5px solid transparent;
+                  border-bottom: 5px solid transparent;
+                }
+              }
+              .img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                background: #ccc;
+              }
+            }
+          }
+        }
+        &.ac-like {
+          .ac-goods {
+            .ac-goods-list {
+              .ac-goods-item {
+                border-bottom: none;
+                &:nth-child(2n) {
+                .acg-bg {
+                    border-right: 10px solid transparent;
+                    border-bottom: 10px solid transparent;
+                  }
+                }
+                &:nth-child(2n+1) {
+                  .acg-bg {
+                    border-left: 10px solid transparent;
+                    border-bottom: 10px solid transparent;
+                  }
                 }
               }
             }
