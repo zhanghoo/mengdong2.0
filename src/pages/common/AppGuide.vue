@@ -6,7 +6,7 @@
       </div>
       <img class="img" src="static/images/guide0.jpg">
     </div>
-    <swiper class="guide-swiper" :options="guideSwiperOption">
+    <swiper class="guide-swiper" :options="guideSwiperOption" :class="{ show: !isShow }">
       <swiper-slide class="guide-page page1">
         <img class="img" src="static/images/guide1.jpg">
       </swiper-slide>
@@ -123,7 +123,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    &:before,&:after {
+    &.show:before,&.show:after {
       content: '';
       display: block;
       position: absolute;
@@ -133,7 +133,7 @@ export default {
       height: 100%;
       background: linear-gradient(#ab84e0, #9e6fdd);
     }
-    &:after {
+    &.show:after {
       left: auto;
       right: 0;
       background: linear-gradient(#deb87c, #dbae65);
@@ -146,6 +146,8 @@ export default {
     }
     .swiper-pagination {
       bottom: 20px;
+      left: 0;
+      width: 100%;
       .icon-heart {
         position: relative;
         margin: 0 8px;
@@ -202,8 +204,8 @@ export default {
     display: block;
     bottom: 15px;
     left: 50%;
-    margin-left: -14%;
-    width: 28%;
+    margin-left: -19%;
+    width: 38%;
     height: 36px;
     line-height: 36px;
     border-radius: 18px;

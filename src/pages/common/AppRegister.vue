@@ -2,21 +2,45 @@
   <div class="app-register">
     <div class="register-bg"><img class="register-img" src="static/images/register.jpg"></div>
     <div class="register-wrap">
-      <span class="icon icon-back" @click="back"></span>
+      <span class="icon icon-back" @click="back">返回</span>
       <div class="input-block">
-        <span class="icon-phone-pack"><i class="icon icon-phone"></i></span>
-        <input class="input" type="text" placeholder="请输入手机号">
-        <span class="icon-close-pack" @click="empty($event)"><i class="icon icon-close"></i></span>
+        <span class="icon-phone-pack"><i class="icon icon-phone">手机号</i></span>
+        <input ref="inputPhone" 
+               class="input" 
+               type="text" 
+               placeholder="手机号" 
+               @keyup="keyupPhone($event)">
+        <span class="icon-close-pack" 
+              :class="{'empty': !emptyPhone0}" 
+              @click="emptyPhone()">
+          <i class="icon icon-close">清空</i>
+        </span>
       </div>
       <div class="input-block">
-        <span class="icon-password-pack"><i class="icon icon-password"></i></span>
-        <input class="input" type="password" placeholder="设置登录密码，不少于6位">
-        <span class="icon-close-pack" @click="empty($event)"><i class="icon icon-close"></i></span>
+        <span class="icon-password-pack"><i class="icon icon-password">密码</i></span>
+        <input ref="inputPassword" 
+               class="input" 
+               type="password" 
+               placeholder="设置登录密码，不少于6位" 
+               @keyup="keyupPassword($event)">
+        <span class="icon-close-pack" 
+              :class="{'empty': !emptyPassword0}" 
+              @click="emptyPassword()">
+          <i class="icon icon-close">清空</i>
+        </span>
       </div>
       <div class="input-block">
-        <span class="icon-verify-pack"><i class="icon icon-verify"></i></span>
-        <input class="input" type="text" placeholder="输入验证码">
-        <span class="icon-close-pack verify" @click="empty($event)"><i class="icon icon-close"></i></span>
+        <span class="icon-verify-pack"><i class="icon icon-verify">验证码</i></span>
+        <input ref="inputVerify" 
+               class="input verify" 
+               type="password" 
+               placeholder="输入验证码" 
+               @keyup="keyupVerify($event)">
+        <span class="icon-close-pack verify" 
+              :class="{'empty': !emptyVerify0}" 
+              @click="emptyVerify()">
+          <i class="icon icon-close">清空</i>
+        </span>
         <a href="javascript:;" class="btn btn-sm btn-get-verify">获取</a>
       </div>
       <a href="javascript:;" class="btn btn-main btn-register">注册</a>
@@ -33,6 +57,24 @@ export default {
   components: {
     AppThirdLogin
   },
+  data () {
+    return {
+      emptyPhoneFlag: true,
+      emptyPasswordFlag: true,
+      emptyVerifyFlag: true
+    }
+  },
+  computed: {
+    emptyPhone0 () {
+      return this.emptyPhoneFlag
+    },
+    emptyPassword0 () {
+      return this.emptyPasswordFlag
+    },
+    emptyVerify0 () {
+      return this.emptyVerifyFlag
+    }
+  },
   created () {
     this.$_hideAppNav()
   },
@@ -43,13 +85,38 @@ export default {
     back () {
       this.$router.go(-1)
     },
-    empty (e) {
-      const tag = e.target
-      const par = tag.parentNode
-      const input = par.previousElementSibling
-      console.log(input)
+    emptyPhone () {
+      const input = this.$refs.inputPhone
       input.value = ''
       input.focus()
+      this.emptyPhoneFlag = 1
+    },
+    emptyPassword () {
+      const input = this.$refs.inputPassword
+      input.value = ''
+      input.focus()
+      this.emptyPasswordFlag = 1
+    },
+    emptyVerify () {
+      const input = this.$refs.inputVerify
+      input.value = ''
+      input.focus()
+      this.emptyVerifyFlag = 1
+    },
+    keyupPhone (e) {
+      const tag = e.target
+      const length = tag.value.length
+      this.emptyPhoneFlag = length === 0 ? 1 : 0
+    },
+    keyupPassword (e) {
+      const tag = e.target
+      const length = tag.value.length
+      this.emptyPasswordFlag = length === 0 ? 1 : 0
+    },
+    keyupVerify (e) {
+      const tag = e.target
+      const length = tag.value.length
+      this.emptyVerifyFlag = length === 0 ? 1 : 0
     }
   }
 }
@@ -100,6 +167,7 @@ export default {
         width: 40px;
       }
       .input {
+        padding-right: 28px;
         width: 100%;
         height: 100%;
         outline: none;
@@ -107,8 +175,8 @@ export default {
         border-bottom: 1px solid #eee;
         background: transparent;
         color: #eee;
-        &:focus + .icon-close-pack {
-          display: flex;
+        &.verify {
+          padding-right: 108px;
         }
       }
       @include placeholder {
@@ -123,6 +191,9 @@ export default {
         margin-top: -10px;
         &.verify {
           right: 80px;
+        }
+        &.empty {
+          display: flex;
         }
       }
       .btn-get-verify {

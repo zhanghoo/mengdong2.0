@@ -14,7 +14,6 @@
           </li>
         </ul>
         </swiper-slide>
-        <div class="swiper-scrollbar swiper-message-scrollbar" slot="scrollbar"></div>
       </swiper>
     </div>
     <app-message-dialog :msges="msges" :msgFrom="msgFrom" ref="appMessageDialog"/>
@@ -43,10 +42,6 @@ export default {
       msges: [],
       messageSwiperOption: {
         /* eslint-disable */
-        scrollbar: {
-          el: '.swiper-message-scrollbar',
-          hide: true
-        },
         on:{
           tap: function(event) {
             //轻触的话弹出对话框

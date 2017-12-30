@@ -6,8 +6,8 @@
       <span class="atl-line"></span>
     </p>
     <p class="atl-third-login">
-      <span class="icon icon-qq"></span>
-      <span class="icon icon-wechat"></span>
+      <span class="icon icon-qq">QQ</span>
+      <span class="icon icon-wechat">微信</span>
     </p>
   </div>
   </div>

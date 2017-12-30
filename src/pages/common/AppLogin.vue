@@ -2,16 +2,32 @@
   <div class="app-login">
     <div class="al-bg"><img class="al-img" src="static/images/login.jpg"></div>
     <div class="al-wrap">
-      <span class="icon icon-back" @click="back"></span>
+      <span class="icon icon-back" @click="back">返回</span>
       <div class="input-block">
-        <span class="icon-phone-pack"><i class="icon icon-phone"></i></span>
-        <input class="input" type="text" placeholder="手机号">
-        <span class="icon-close-pack" @click="empty($event)"><i class="icon icon-close"></i></span>
+        <span class="icon-phone-pack"><i class="icon icon-phone">手机号</i></span>
+        <input ref="inputPhone" 
+               class="input" 
+               type="text" 
+               placeholder="手机号" 
+               @keyup="keyupPhone($event)">
+        <span class="icon-close-pack" 
+              :class="{'empty': !emptyPhone0}" 
+              @click="emptyPhone()">
+          <i class="icon icon-close">清空</i>
+        </span>
       </div>
       <div class="input-block">
-        <span class="icon-password-pack"><i class="icon icon-password"></i></span>
-        <input class="input" type="password" placeholder="密码">
-        <span class="icon-close-pack" @click="empty($event)"><i class="icon icon-close"></i></span>
+        <span class="icon-password-pack"><i class="icon icon-password">密码</i></span>
+        <input ref="inputPassword" 
+               class="input" 
+               type="password" 
+               placeholder="密码" 
+               @keyup="keyupPassword($event)">
+        <span class="icon-close-pack" 
+              :class="{'empty': !emptyPassword0}" 
+              @click="emptyPassword()">
+          <i class="icon icon-close">清空</i>
+        </span>
       </div>
       <a href="javascript:;" class="btn btn-main btn-login" @click="login">登录</a>
       <a href="javascript:;" class="btn btn-default btn-forget">忘记密码？</a>
@@ -28,6 +44,20 @@ export default {
   components: {
     AppThirdLogin
   },
+  data () {
+    return {
+      emptyPhoneFlag: true,
+      emptyPasswordFlag: true
+    }
+  },
+  computed: {
+    emptyPhone0 () {
+      return this.emptyPhoneFlag
+    },
+    emptyPassword0 () {
+      return this.emptyPasswordFlag
+    }
+  },
   created () {
     this.$_hideAppNav()
   },
@@ -38,15 +68,30 @@ export default {
     back () {
       this.$router.go(-1)
     },
-    empty (e) {
-      const tag = e.target
-      const par = tag.parentNode
-      const input = par.previousElementSibling
-      input.value = ''
-      input.focus()
-    },
     login () {
       this.$router.push('index')
+    },
+    emptyPhone () {
+      const input = this.$refs.inputPhone
+      input.value = ''
+      input.focus()
+      this.emptyPhoneFlag = 1
+    },
+    emptyPassword () {
+      const input = this.$refs.inputPassword
+      input.value = ''
+      input.focus()
+      this.emptyPasswordFlag = 1
+    },
+    keyupPhone (e) {
+      const tag = e.target
+      const length = tag.value.length
+      this.emptyPhoneFlag = length === 0 ? 1 : 0
+    },
+    keyupPassword (e) {
+      const tag = e.target
+      const length = tag.value.length
+      this.emptyPasswordFlag = length === 0 ? 1 : 0
     }
   }
 }
@@ -96,6 +141,7 @@ export default {
         width: 40px;
       }
       .input {
+        padding-right: 28px;
         width: 100%;
         height: 100%;
         outline: none;
@@ -103,9 +149,6 @@ export default {
         border-bottom: 1px solid #eee;
         background: transparent;
         color: #eee;
-        &:focus + .icon-close-pack {
-          visibility: visible;
-        }
       }
       @include placeholder {
         color: #eee;
@@ -117,6 +160,9 @@ export default {
         top: 50%;
         right: 0;
         margin-top: -10px;
+        &.empty {
+          visibility: visible;
+        }
       }
     }
     .btn-login, .btn-forget{
