@@ -35,7 +35,6 @@
                                                 @clickArticle="clickArticle(article)"/>
                 </div>
               </swiper-slide>
-              <div class="swiper-scrollbar swiper-article-scrollbar" slot="scrollbar"></div>
             </swiper>
           </template>
           <template v-else>
@@ -55,7 +54,6 @@
                                               @clickAvatarToUserHome="clickAvatarToUserHome"/>
                 </div>
               </swiper-slide>
-              <div class="swiper-scrollbar swiper-image-scrollbar" slot="scrollbar"></div>
             </swiper>
           </template>
           <template v-else>
@@ -76,7 +74,6 @@
                                               @clickAvatarToUserHome="clickAvatarToUserHome" />
                 </div>
               </swiper-slide>
-              <div class="swiper-scrollbar swiper-video-scrollbar" slot="scrollbar"></div>
             </swiper>
           </template>
           <template v-else>
@@ -155,26 +152,14 @@ export default {
       },
       swiperArticleOption: {
         /* eslint-disable */
-        scrollbar: {
-          el: '.swiper-article-scrollbar',
-          hide: true
-        }
         /* eslint-enable */
       },
       swiperImageOption: {
         /* eslint-disable */
-        scrollbar: {
-          el: '.swiper-image-scrollbar',
-          hide: true
-        }
         /* eslint-enable */
       },
       swiperVideoOption: {
         /* eslint-disable */
-        scrollbar: {
-          el: '.swiper-video-scrollbar',
-          hide: true
-        }
         /* eslint-enable */
       }
     }

@@ -19,7 +19,6 @@
               </li>
             </ul>
           </swiper-slide>
-          <div class="swiper-scrollbar swiper-pet-item-scrollbar" slot="scrollbar"></div>
         </swiper>
       </div>
   </div>
@@ -34,10 +33,6 @@ export default {
     return {
       shopPetItemSwiperOption: {
         /* eslint-disable */
-        scrollbar: {
-          el: '.swiper-pet-item-scrollbar',
-          hide: true
-        }
         /* eslint-enable */
       }
     }

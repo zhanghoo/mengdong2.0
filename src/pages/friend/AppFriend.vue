@@ -27,7 +27,6 @@
           </template>
           </swiper-slide>
         </swiper-slide>
-        <div class="swiper-scrollbar swiper-friends-scrollbar" slot="scrollbar"></div>
       </swiper>
     </div>
     <app-dialog-image ref="afImage" :image="selectedImage" @contenIBottom="contenBottom"/>
@@ -62,10 +61,6 @@ export default {
       selectedVideo: {},
       friendsSwiperOption: {
         /* eslint-disable */
-        scrollbar: {
-          el: '.swiper-friends-scrollbar',
-          hide: true
-        }
         /* eslint-enable */
       }
     }

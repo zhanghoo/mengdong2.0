@@ -21,7 +21,6 @@
                 </li>
               </ul>
             </swiper-slide>
-            <div class="swiper-scrollbar swiper-dog-scrollbar" slot="scrollbar"></div>
           </swiper>
         </swiper-slide>
         <swiper-slide>
@@ -38,7 +37,6 @@
                 </li>
               </ul>
             </swiper-slide>
-            <div class="swiper-scrollbar swiper-cat-scrollbar" slot="scrollbar"></div>
           </swiper>
         </swiper-slide>
       </swiper>
@@ -71,18 +69,10 @@ export default {
       },
       swiperDogOption: {
         /* eslint-disable */
-        scrollbar: {
-          el: '.swiper-dog-scrollbar',
-          hide: true
-        }
         /* eslint-enable */
       },
       swiperCatOption: {
         /* eslint-disable */
-        scrollbar: {
-          el: '.swiper-cat-scrollbar',
-          hide: true
-        }
         /* eslint-enable */
       }
     }

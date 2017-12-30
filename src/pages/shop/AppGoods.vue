@@ -71,7 +71,6 @@
             <div class="ago-info-desc">此款狗狗小礼服，是为狗狗量身定制，布料柔软舒适，而且样式新潮。</div>
           </div>
         </swiper-slide>
-        <!-- <div class="swiper-scrollbar swiper-goods-scrollbar" slot="scrollbar"></div> -->
       </swiper>
     </div>
     <div class="ago-footer">
@@ -109,10 +108,6 @@ export default {
       appLayerMsg: '',
       goodsSwiperOption: {
         /* eslint-disable */
-        // scrollbar: {
-        //   el: '.swiper-home-scrollbar',
-        //   hide: true
-        // }
         on: {
           touchMove: function() {
             if (this.translate <= -48 && self.isTransparent) {

@@ -15,7 +15,6 @@
                 <tabs-main-goods-picked-panel :picked="picked" />
               </div>
             </swiper-slide>
-            <div class="swiper-scrollbar swiper-picked-scrollbar" slot="scrollbar"></div>
           </swiper>
         </swiper-slide>
         <swiper-slide>
@@ -25,7 +24,6 @@
                 <tabs-main-goods-hot-panel :hot="hot" />
               </div>
             </swiper-slide>
-            <div class="swiper-scrollbar swiper-hot-scrollbar" slot="scrollbar"></div>
           </swiper>
         </swiper-slide>
         <swiper-slide>
@@ -35,7 +33,6 @@
                 <tabs-main-goods-limit-panel :limit="limit" :direction="$_setDirection(index)"/>
               </div>
             </swiper-slide>
-            <div class="swiper-scrollbar swiper-limit-scrollbar" slot="scrollbar"></div>
           </swiper>
         </swiper-slide>
       </swiper>
@@ -77,26 +74,14 @@ export default {
       },
       swiperPickedOption: {
         /* eslint-disable */
-        scrollbar: {
-          el: '.swiper-picked-scrollbar',
-          hide: true
-        }
         /* eslint-enable */
       },
       swiperHotOption: {
         /* eslint-disable */
-        scrollbar: {
-          el: '.swiper-hot-scrollbar',
-          hide: true
-        }
         /* eslint-enable */
       },
       swiperLimitOption: {
         /* eslint-disable */
-        scrollbar: {
-          el: '.swiper-limit-scrollbar',
-          hide: true
-        }
         /* eslint-enable */
       }
     }

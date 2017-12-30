@@ -54,7 +54,6 @@
             </div>
           </div>
         </swiper-slide>
-        <!-- <div class="swiper-scrollbar swiper-cart-scrollbar" slot="scrollbar"></div> -->
       </swiper>
     </div>
     <div class="ac-footer">
@@ -91,10 +90,6 @@ export default {
       appLayerMsg: '',
       cartSwiperOption: {
         /* eslint-disable */
-        // scrollbar: {
-        //   el: '.swiper-home-scrollbar',
-        //   hide: true
-        // }
         /* eslint-enable */
       }
     }

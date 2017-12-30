@@ -2,7 +2,7 @@
   <div class="app-slide-menu-panel">
     <swiper :options="appSlideMenuOption" ref="appSlideMenuSwiper">
       <swiper-slide class="content">
-        <span class="icon icon-msg"></span>
+        <span class="asmp-avatar"></span>
         <div class="msg-info">
           <p class="info">
             <span class="name">{{msg.name}}</span>
@@ -46,15 +46,15 @@ export default {
     height: 60px;
     &.content {
       width: 100%;
-      .icon-msg {
+      .asmp-avatar {
         position: absolute;
-        top: 50%;
+        top: 13px;
         left: 10px;
-        margin-top: -17px;
         width: 34px;
         height: 34px;
         border-radius: 50%;
         z-index: 20;
+        background: #ccc;
       }
       .msg-info {
         position: absolute;

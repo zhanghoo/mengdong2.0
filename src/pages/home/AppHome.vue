@@ -35,7 +35,6 @@
               </div>
             </div>
           </swiper-slide>
-        <!-- <div class="swiper-scrollbar swiper-home-scrollbar" slot="scrollbar"></div> -->
       </swiper>
     </div>
   </div>
@@ -63,10 +62,6 @@ export default {
       isTransparent: true,
       homeSwiperOption: {
         /* eslint-disable */
-        // scrollbar: {
-        //   el: '.swiper-home-scrollbar',
-        //   hide: true
-        // }
         on: {
           touchMove: function() {
             if (this.translate <= -48 && self.isTransparent) {
