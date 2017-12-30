@@ -54,7 +54,7 @@ export default {
   },
   created () {
     this.$_hideAppNav()
-    axios.get('../static/mocks/messages.json').then((res) => {
+    axios.get('static/mocks/messages.json').then((res) => {
       this.msgList = res.data
     })
   },
