@@ -40,21 +40,24 @@ export default {
     return {
       userList: {},
       isTransparent: true,
+      translate: 0,
+      dialogEl: null,
       homeUserSwiperOption: {
         /* eslint-disable */
-        // scrollbar: {
-        //   el: '.swiper-user-home-scrollbar',
-        //   hide: true
-        // }
+        freeModeMomentum: false, //关闭动量，释放slide之后立即停止不会滑动。
         on: {
           touchMove: function() {
+            // 用于设置弹框的 top
+            self.translate = this.translate >= 0 ? 0 
+                             : -this.translate > self.slideToBottomHeight ? self.slideToBottomHeight 
+                             : -this.translate
             if (this.translate <= -48 && self.isTransparent) {
               self.isTransparent = false
             } else if (this.translate > -48 && !self.isTransparent) {
               self.isTransparent = true
             }
           }
-        }
+        },
         /* eslint-enable */
       }
     }
@@ -62,6 +65,15 @@ export default {
   computed: {
     homeUserSwiper () {
       return this.$refs.homeUserSwiper.swiper
+    },
+    homeUserSwiperHeight () {
+      return parseInt(this.homeUserSwiper.$el.css('height'))
+    },
+    homeUserSwiperWraperHeight () {
+      return parseInt(this.homeUserSwiper.$wrapperEl.css('height'))
+    },
+    slideToBottomHeight () {
+      return this.homeUserSwiperWraperHeight - this.homeUserSwiperHeight
     },
     hasTouch () {
       return 'ontouchstart' in window
@@ -90,6 +102,8 @@ export default {
     setTop (dialogWrap) {
       this.$refs.auhContent.style.zIndex = '990'
       this.scrollDisable()
+      this.dialogEl = dialogWrap.$el
+      dialogWrap.$el.style.top = `${this.translate}px`
       dialogWrap.$el.style.height = `${this.$refs.auhContent.offsetHeight}px`
     },
     setBottom () {
@@ -104,9 +118,13 @@ export default {
       }
     },
     scrollDisable () {
+      // 移除所有slide监听事件
+      this.homeUserSwiper.detachEvents()
       window.addEventListener(this.tapstart, this.tapstartHandler(event))
     },
     scrollEnable () {
+      // 重新绑定所有监听事件
+      this.homeUserSwiper.attachEvents()
       window.removeEventListener(this.tapstart, this.tapstartHandler(event))
     }
   }
