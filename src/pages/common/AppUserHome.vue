@@ -42,6 +42,7 @@ export default {
       isTransparent: true,
       translate: 0,
       dialogEl: null,
+      slideToBottomHeight: 0,
       homeUserSwiperOption: {
         /* eslint-disable */
         freeModeMomentum: false, //关闭动量，释放slide之后立即停止不会滑动。
@@ -65,21 +66,6 @@ export default {
   computed: {
     homeUserSwiper () {
       return this.$refs.homeUserSwiper.swiper
-    },
-    homeUserSwiperHeight () {
-      return parseInt(this.homeUserSwiper.$el.css('height'))
-    },
-    homeUserSwiperWraperHeight () {
-      return parseInt(this.homeUserSwiper.$wrapperEl.css('height'))
-    },
-    slideToBottomHeight () {
-      return this.homeUserSwiperWraperHeight - this.homeUserSwiperHeight
-    },
-    hasTouch () {
-      return 'ontouchstart' in window
-    },
-    tapstart () {
-      return this.hastouch ? 'touchstart' : 'mousedown'
     }
   },
   created () {
@@ -98,6 +84,8 @@ export default {
     swiperUpdate () {
       // console.log(this.homeUserSwiper)
       this.homeUserSwiper.update()
+      this.slideToBottomHeight = parseInt(this.homeUserSwiper.$wrapperEl.css('height')) - parseInt(this.homeUserSwiper.$el.css('height'))
+      console.log(this.slideToBottomHeight)
     },
     setTop (dialogWrap) {
       this.$refs.auhContent.style.zIndex = '990'
@@ -120,13 +108,10 @@ export default {
     scrollDisable () {
       // 移除所有slide监听事件
       this.homeUserSwiper.detachEvents()
-      // window.addEventListener(this.tapstart, this.tapstartHandler(event))
     },
     scrollEnable () {
       // 重新绑定所有监听事件
       this.homeUserSwiper.attachEvents()
-      this.swiperUpdate()
-      // window.removeEventListener(this.tapstart, this.tapstartHandler(event))
     }
   }
 }
