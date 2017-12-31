@@ -120,12 +120,13 @@ export default {
     scrollDisable () {
       // 移除所有slide监听事件
       this.homeUserSwiper.detachEvents()
-      window.addEventListener(this.tapstart, this.tapstartHandler(event))
+      // window.addEventListener(this.tapstart, this.tapstartHandler(event))
     },
     scrollEnable () {
       // 重新绑定所有监听事件
       this.homeUserSwiper.attachEvents()
-      window.removeEventListener(this.tapstart, this.tapstartHandler(event))
+      this.swiperUpdate()
+      // window.removeEventListener(this.tapstart, this.tapstartHandler(event))
     }
   }
 }

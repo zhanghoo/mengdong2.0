@@ -1,5 +1,5 @@
 <template>
-	<div v-show="showFlag" class="app-video-dialog" @click="hide">
+	<div v-show="showFlag" class="app-video-dialog">
     <div class="app-video-content">
       <div class="app-video-bg" @click.self="hide"></div>
       <div class="app-video-wrap"></div>
