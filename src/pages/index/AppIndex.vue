@@ -6,7 +6,9 @@
       <span slot="right" class="icon icon-search" @click="show">搜索</span>
     </app-header>
     <div class="ai-content" ref="aiContent">
-      <tabs-main-blog :app-list="appList" @top="setTop" @bottom="setBottom"/>
+      <tabs-main-blog :app-list="appList" 
+                      @top="setTop" 
+                      @bottom="setBottom"/>
     </div>
     <div class="ai-search-panel" v-show="showFlag">
       <div class="ai-header">

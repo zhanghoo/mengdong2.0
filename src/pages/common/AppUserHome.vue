@@ -5,13 +5,17 @@
       <span slot="title">小菜菜</span>
       <span slot="right"></span>
     </app-header>
-    <div class="auh-content">
+    <div class="auh-content" ref="auhContent">
       <swiper class="home-swiper" :options="homeUserSwiperOption" ref="homeUserSwiper">
           <swiper-slide>
             <the-home-profile/>
-            <tabs-main-blog :app-list="userList" :role="'user'" :mainSlide="false" @swiperUpdate="swiperUpdate"/>
+            <tabs-main-blog :app-list="userList" 
+                            :role="'user'" 
+                            :mainSlide="false" 
+                            @swiperUpdate="swiperUpdate"
+                            @top="setTop" 
+                            @bottom="setBottom"/>
           </swiper-slide>
-          <!-- <div class="swiper-scrollbar swiper-user-home-scrollbar" slot="scrollbar"></div> -->
       </swiper>
     </div>
   </div>
@@ -58,6 +62,12 @@ export default {
   computed: {
     homeUserSwiper () {
       return this.$refs.homeUserSwiper.swiper
+    },
+    hasTouch () {
+      return 'ontouchstart' in window
+    },
+    tapstart () {
+      return this.hastouch ? 'touchstart' : 'mousedown'
     }
   },
   created () {
@@ -76,6 +86,28 @@ export default {
     swiperUpdate () {
       // console.log(this.homeUserSwiper)
       this.homeUserSwiper.update()
+    },
+    setTop (dialogWrap) {
+      this.$refs.auhContent.style.zIndex = '990'
+      this.scrollDisable()
+      dialogWrap.$el.style.height = `${this.$refs.auhContent.offsetHeight}px`
+    },
+    setBottom () {
+      this.scrollEnable()
+      this.$refs.auhContent.style.zIndex = ''
+    },
+    tapstartHandler (e) {
+      if (e.cancelable) {
+        if (!e.defaultPrevented) {
+          e.preventDefault()
+        }
+      }
+    },
+    scrollDisable () {
+      window.addEventListener(this.tapstart, this.tapstartHandler(event))
+    },
+    scrollEnable () {
+      window.removeEventListener(this.tapstart, this.tapstartHandler(event))
     }
   }
 }
@@ -84,7 +116,7 @@ export default {
 <style lang="scss">
 @import "../../assets/scss/md";
 .app-user-home {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;

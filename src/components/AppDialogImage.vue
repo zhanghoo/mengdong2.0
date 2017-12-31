@@ -140,7 +140,7 @@ export default {
       }
     }
     .app-image-close {
-      margin: 20px auto;
+      margin: 10px auto 0;
       width: 20px;
       height: 20px;
       background: #fff;

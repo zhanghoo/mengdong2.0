@@ -16,7 +16,7 @@ const swiperOptions = {
   slidesPerView: 'auto',    //默认number 1
   clickable: true,          //默认false 分页器点击
   autoplay: false,          //默认false 自动切换 
-  mousewheel: true,         //默认false 开启鼠标滚轮控制Swiper切换。
+  mousewheel: false,         //默认false 开启鼠标滚轮控制Swiper切换。
   freeMode: true,           //默认false，普通模式：slide滑动时只滑动一格，并自动贴合wrapper，设置为true则变为free模式，slide会根据惯性滑动且不会贴合。autoHeight: true, //自动高度。设置为true时，wrapper和container会随着当前slide的高度而发生变化。
   autoHeight: true,         //自动高度。设置为true时，wrapper和container会随着当前slide的高度而发生变化。
   roundLengths: true,       //防止某些分辨率的屏幕上文字或边界(border)模糊。

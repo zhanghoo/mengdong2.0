@@ -187,13 +187,13 @@ export default {
     },
     clickImage (image) {
       this.selectedImage = image
-      this.$emit('top')
+      this.$emit('top', this.$refs.tmbImage)
       this.$refs.tmbImage.show()
     },
     clickVideo (video) {
       this.selectedVideo = video
-      this.$emit('top')
       this.$refs.tmbVideo.show()
+      this.$emit('top', this.$refs.tmbVideo)
     },
     clickAvatarToUserHome () {
       this.$router.push('userhome')
