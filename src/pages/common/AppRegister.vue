@@ -127,11 +127,11 @@ export default {
 <style lang="scss">
 @import "../../assets/scss/md";
 .app-register {
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
   .ar-bg {
     position: relative;
     top: 0;
@@ -217,7 +217,7 @@ export default {
     }
     .ar-third-login {
       position: relative;
-      margin-top: 160px;
+      margin-top: 100px;
     }
   }
 }
