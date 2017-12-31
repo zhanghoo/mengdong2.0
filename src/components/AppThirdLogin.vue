@@ -23,7 +23,7 @@ export default {
 @import "../assets/scss/md";
 .app-third-login {
   position: absolute;
-  bottom: 0;
+  top: 86%;
   left: 0;
   padding: 0 23%;
   width: 100%;

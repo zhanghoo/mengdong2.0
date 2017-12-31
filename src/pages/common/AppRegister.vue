@@ -1,7 +1,7 @@
 <template>
   <div class="app-register">
-    <div class="register-bg"><img class="register-img" src="static/images/register.jpg"></div>
-    <div class="register-wrap">
+    <div class="ar-bg"><img class="ar-img" src="static/images/register.jpg"></div>
+    <div class="ar-wrap">
       <span class="icon icon-back" @click="back">返回</span>
       <div class="input-block">
         <span class="icon-phone-pack"><i class="icon icon-phone">手机号</i></span>
@@ -130,18 +130,22 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  .register-bg {
+  .ar-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    .register-img {
+    background: #d0545f;
+    .ar-img {
+      position: absolute;
+      bottom: 0;
+      left: 0;
       width: 100%;
-      height: 100%;
+      height: auto;
     }
   }
-  .register-wrap {
+  .ar-wrap {
     position: absolute;
     top: 0;
     left: 0;
