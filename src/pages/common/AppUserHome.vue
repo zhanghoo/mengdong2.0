@@ -49,6 +49,7 @@ export default {
         on: {
           touchMove: function() {
             // 用于设置弹框的 top
+            self.slideToBottomHeight = self.slideToBottomHeight ? self.slideToBottomHeight : self.swiperUpdate()
             self.translate = this.translate >= 0 ? 0 
                              : -this.translate > self.slideToBottomHeight ? self.slideToBottomHeight 
                              : -this.translate
@@ -85,7 +86,7 @@ export default {
       // console.log(this.homeUserSwiper)
       this.homeUserSwiper.update()
       this.slideToBottomHeight = parseInt(this.homeUserSwiper.$wrapperEl.css('height')) - parseInt(this.homeUserSwiper.$el.css('height'))
-      console.log(this.slideToBottomHeight)
+      return this.slideToBottomHeight
     },
     setTop (dialogWrap) {
       this.$refs.auhContent.style.zIndex = '990'

@@ -62,35 +62,31 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
+    padding-top: 81%;
     width: 100%;
     height: 100%;
     .arl-title {
-      position: absolute;
-      top: 50%;
+      position: relative;
+      top: 0;
       left: 0;
-      margin-bottom: -10px;
+      margin: 10px 0;
       width: 100%;
       height: 20px;
+      line-height: 20px;
       color: #fff;
       text-align: center;
     }
     .btn-login,
     .btn-register {
-      position: absolute;
-      margin: 0 23%;
-      top: 61.5%;
+      position: relative;
+      margin: 10px 23% 0;
       width: 54%;
       height: 40px;
       line-height: 40px;
     }
-    .btn-register {
-      top: 69.5%;
-    }
     .al-third-login {
-      position: absolute;
-      top: 85%;
-      left: 0;
-      width: 100%;
+      position: relative;
+      margin-top: 60px;
     }
   }
 }
