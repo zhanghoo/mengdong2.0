@@ -9,6 +9,8 @@
                class="input" 
                type="text" 
                placeholder="手机号" 
+               @focus="focusPhone($event)" 
+               @blur="blurPhone()" 
                @keyup="keyupPhone($event)">
         <span class="icon-close-pack" 
               :class="{'empty': !emptyPhone0}" 
@@ -22,6 +24,8 @@
                class="input" 
                type="password" 
                placeholder="设置登录密码，不少于6位" 
+               @focus="focusPassword($event)" 
+               @blur="blurPassword()" 
                @keyup="keyupPassword($event)">
         <span class="icon-close-pack" 
               :class="{'empty': !emptyPassword0}" 
@@ -35,6 +39,8 @@
                class="input verify" 
                type="password" 
                placeholder="输入验证码" 
+               @focus="focusVerify($event)" 
+               @blur="blurVerify()" 
                @keyup="keyupVerify($event)">
         <span class="icon-close-pack verify" 
               :class="{'empty': !emptyVerify0}" 
@@ -103,6 +109,30 @@ export default {
       const input = this.$refs.inputVerify
       input.value = ''
       input.focus()
+      this.emptyVerifyFlag = 1
+    },
+    focusPhone (e) {
+      const tag = e.target
+      const length = tag.value.length
+      this.emptyPhoneFlag = length === 0 ? 1 : 0
+    },
+    focusPassword (e) {
+      const tag = e.target
+      const length = tag.value.length
+      this.emptyPasswordFlag = length === 0 ? 1 : 0
+    },
+    focusVerify (e) {
+      const tag = e.target
+      const length = tag.value.length
+      this.emptyVerifyFlag = length === 0 ? 1 : 0
+    },
+    blurPhone () {
+      this.emptyPhoneFlag = 1
+    },
+    blurPassword () {
+      this.emptyPasswordFlag = 1
+    },
+    blurVerify () {
       this.emptyVerifyFlag = 1
     },
     keyupPhone (e) {
