@@ -185,7 +185,7 @@ export default {
     }
     .al-third-login {
       position: relative;
-      margin-top: 100px;
+      margin-top: 130px;
     }
   }
 }

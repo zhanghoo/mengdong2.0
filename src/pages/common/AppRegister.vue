@@ -217,7 +217,7 @@ export default {
     }
     .ar-third-login {
       position: relative;
-      margin-top: 100px;
+      margin-top: 130px;
     }
   }
 }

@@ -27,7 +27,7 @@ export default {
   left: 0;
   padding: 0 23%;
   width: 100%;
-  height: 14%;
+  height: 80px;
   .atl-title-line {
     display: flex;
     color: #fff;
