@@ -5,8 +5,10 @@
       <p class="arl-title">嘿！就剩你了，快上车！</p>
       <a href="javascript:;" class="btn btn-main btn-login" @click="toLogin">登录</a>
       <a href="javascript:;" class="btn btn-default btn-register" @click="toRegister">注册</a>
+      <div class="al-third-login">
+        <app-third-login/>
+      </div>
     </div>
-    <app-third-login/>
   </div>
 </template>
 
@@ -83,6 +85,12 @@ export default {
     }
     .btn-register {
       top: 69.5%;
+    }
+    .al-third-login {
+      position: absolute;
+      top: 85%;
+      left: 0;
+      width: 100%;
     }
   }
 }

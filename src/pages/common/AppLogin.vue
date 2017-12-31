@@ -31,8 +31,10 @@
       </div>
       <a href="javascript:;" class="btn btn-main btn-login" @click="login">登录</a>
       <a href="javascript:;" class="btn btn-default btn-forget">忘记密码？</a>
+      <div class="al-third-login">
+        <app-third-login/>
+      </div>
     </div>
-    <app-third-login/>
   </div>
 </template>
 
@@ -114,7 +116,7 @@ export default {
     background: #5759d0;
     .al-img {
       position: absolute;
-      bottom: 0;
+      top: 0;
       left: 0;
       width: 100%;
       height: auto;
@@ -180,6 +182,10 @@ export default {
       font-size: 13px;
       width: 24%;
       margin: 10px 38% 0;
+    }
+    .al-third-login {
+      position: relative;
+      padding-top: 56%;
     }
   }
 }

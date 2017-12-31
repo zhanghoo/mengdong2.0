@@ -44,8 +44,10 @@
         <a href="javascript:;" class="btn btn-sm btn-get-verify">获取</a>
       </div>
       <a href="javascript:;" class="btn btn-main btn-register">注册</a>
+      <div class="ar-third-login">
+        <app-third-login/>
+      </div>
     </div>
-    <app-third-login/>
   </div>
 </template>
 
@@ -139,7 +141,7 @@ export default {
     background: #d0545f;
     .ar-img {
       position: relative;
-      bottom: 0;
+      top: 0;
       left: 0;
       width: 100%;
       height: auto;
@@ -212,6 +214,10 @@ export default {
       width: 54%;
       height: 40px;
       line-height: 40px;
+    }
+    .ar-third-login {
+      position: relative;
+      padding-top: 56%;
     }
   }
 }
