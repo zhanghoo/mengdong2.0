@@ -70,9 +70,9 @@ export default {
 @import "assets/scss/md";
 .app {
   .app-content {
-    position: absolute;
+    position: relative;
     width: 100%;
-    height: 100%;
+    height: auto;
   }
   .app-nav {
     position: fixed;

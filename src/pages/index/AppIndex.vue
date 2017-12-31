@@ -82,11 +82,8 @@ export default {
 <style lang="scss">
 @import "../../assets/scss/md";
 .app-index {
-  position: absolute;
-  width: 100%;
-  height: 100%;
   .ai-content {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     padding: 48px 0 58px 0;

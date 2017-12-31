@@ -125,20 +125,20 @@ export default {
 <style lang="scss">
 @import "../../assets/scss/md";
 .app-register {
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: auto;
   .ar-bg {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: auto;
     background: #d0545f;
     .ar-img {
-      position: absolute;
+      position: relative;
       bottom: 0;
       left: 0;
       width: 100%;
